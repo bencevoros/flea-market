@@ -24,7 +24,6 @@ Run `npm run start:prod` to build and run the project. The backend build artifac
   - routes/ - Here combine modules routes
   - modules/
     - module/
-      - index.ts - Exports the module route, model, controller, etc.
       - module.controller.ts - Define here the business logic
       - module.model.ts - Define here the database manipulation
       - module.route.ts - Define here the endpoints for the module
