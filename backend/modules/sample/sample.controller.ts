@@ -19,7 +19,8 @@ class SampleController implements Controller {
 
   public create (req: Request, res: Response) {
     if (!req.body.title || !req.body.message) {
-      return res.send('Title and message are required').status(400);
+      res.statusMessage = 'Title and message are required';
+      return res.sendStatus(400);
     }
 
     const sample: Sample = this.model.create(req.body);
@@ -37,13 +38,15 @@ class SampleController implements Controller {
   }
 
   public delete (req: Request, res: Response) {
-    const success: Boolean = this.model.delete(req.body.id);
+    const success: Boolean = this.model.delete(req.query.id);
 
     if (success) {
-      return res.sendStatus(200);
+      res.sendStatus(200);
+      return;
     }
 
-    return res.sendStatus(400);
+    res.statusMessage = 'The item cannot be deleted.';
+    res.sendStatus(400);
   }
 }
 

@@ -1,0 +1,18 @@
+<div *ngIf="error">
+  <h5 class="error">{{ error.message }}</h5>
+</div>
+<h3>Sample test</h3>
+<div class="container">
+  <form class="form">
+    <input type="text" placeholder="Title" [(value)]="sampleValue.title" (change)="change($event, 'title')"/>
+    <input type="text" placeholder="Message" [(value)]="sampleValue.message" (change)="change($event, 'message')"/>
+    <button type="submit" (click)="create($event)">Create</button>
+  </form>
+  <div *ngIf="sample" class="data">
+    <div class="title">
+      <h5>{{ sample.title }}</h5>
+      <div class="delete" (click)="delete()">X</div>
+    </div>
+    <p>{{ sample.message }}</p>
+  </div>
+</div>

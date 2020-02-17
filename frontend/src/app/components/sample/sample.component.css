@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.data {
+  box-shadow: 1px 1px 3px 1px lightgray;
+  padding: 5px 40px;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form > input {
+  margin-bottom: 10px;
+}
+
+.delete {
+ cursor: pointer;
+ padding: 10px;
+ color: rgba(171, 0, 0, .7);
+}
+
+.error {
+  position: absolute;
+  color: white;
+  background: rgba(171, 0, 0, .7);
+  padding: 5px 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 30%;
+  text-align: center;
+}
