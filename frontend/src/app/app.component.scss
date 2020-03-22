@@ -1,0 +1,58 @@
+@import './styles/global-variables.scss';
+
+.app-wrapper {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto';
+    font-size: 14px;
+    font-weight: 400;
+    background: whitesmoke;
+
+    .header {
+        display: block;
+        height: 50px;
+        line-height: 50px;
+        flex: 0 0 50px;
+    }
+
+    .content-wrapper {
+        display: flex;
+        width: 100%;
+        height: calc(100% - 50px);
+
+        .menu {
+            flex: 0 0 300px;
+            width: 300px;
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            transition: all .1s linear;
+            z-index: 1;
+            background-color: whitesmoke;
+        }
+
+        @media screen and (min-width: $media-query-lg) {
+          .menu {
+            display: block;
+            visibility: visible;
+            opacity: 1;
+            position: relative;
+            z-index: 0;
+            height: 100%;
+          }
+        }
+
+        .show-menu {
+          display: block;
+          visibility: visible;
+          opacity: 1;
+          height: calc(100% - 50px);
+        }
+
+        .content {
+            flex: 1 1 auto;
+            overflow: auto;
+            padding: 20px;
+        }
+    }
+}

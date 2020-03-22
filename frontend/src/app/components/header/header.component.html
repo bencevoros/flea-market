@@ -1,0 +1,12 @@
+<div class="header-wrapper">
+  <div class="left-side">
+    <button *ngIf="menuIsOpen" pButton type="button" (click)="onChangeMenuClick()" icon="pi pi-times"
+      class="ui-button-secondary menu-change-button"><i class="pi pi-times"></i></button>
+    <button *ngIf="!menuIsOpen" pButton type="button" (click)="onChangeMenuClick()" icon="pi pi-bars"
+      class="ui-button-secondary menu-change-button"><i class="pi pi-align-justify"></i></button>
+    <label class="title">Flea market</label>
+  </div>
+  <div class="right-side">
+
+  </div>
+</div>

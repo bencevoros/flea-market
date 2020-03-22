@@ -1,0 +1,10 @@
+<div class="app-wrapper">
+  <app-header (changeMenuEvent)="changeMenu()" [menuIsOpen]="menuIsOpen" class="header"></app-header>
+  <div class="content-wrapper">
+    <app-menu class="menu" [ngClass]="{'show-menu': menuIsOpen}">
+    </app-menu>
+    <div class="content" (click)="menuIsOpen && changeMenu()">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+@import '../../styles/global-variables.scss';
+
+.header-wrapper{
+    background-color: #e1e6eb;
+    border-bottom: 1px solid rgba(30, 67, 88, 0.2);
+    color: #333333;
+
+    .left-side{
+        .title{
+            font-weight: 600;
+            font-size: 16px;
+            padding: 0 10px;
+        }
+
+        .menu-change-button {
+          margin-left: 10px;
+        }
+
+        @media screen and (min-width: $media-query-lg) {
+          .menu-change-button {
+            display: none;
+          }
+        }
+    }
+}

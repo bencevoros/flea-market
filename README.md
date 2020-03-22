@@ -39,7 +39,7 @@ Run `npm run start:prod` to build and run the project. The backend build artifac
         - module.component.html - Define here the html for the module
         - module.component.css - Define here the css for the module
       - utils/ - Define here the shared files what is used in multiple files
-      - models/ - Define here the data models
+      - models/ - Define here the data _models
       - services/ - Define here the services for the modules
     - assets/ - Add the asset files like pictures, global styles here
     - environments/ - Define here the environment variables

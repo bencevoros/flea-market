@@ -1,0 +1,103 @@
+$primary-content-color: hsl(0, 0%, 13%);
+$secondary-content-color: hsl(0, 0%, 29%);
+$ancillary-content-color: hsl(0, 0%, 45%);
+
+// Colors
+$background-color: #f9f9f9;
+$primary-color: #0f141e;
+$primary-color-light: #202b40;
+$secondary-color: #f97c00;
+$secondary-color-light: #fa9e42;
+$accent-color: #1d62b3;
+
+$default-font: "Roboto";
+
+// Z-indexes
+
+// ****************** PRIMENG ******************
+$form-error-border: #c0392b;
+$form-error-backgroud: #ffcccb;
+
+//// Buttons
+// Default
+$button-default-bg: $primary-color;
+$button-default-color: white;
+$button-default-border: $primary-color;
+$button-enabled-hover-bg: $secondary-color;
+$button-enabled-hover-color: $primary-color;
+$button-enabled-hover-border: $secondary-color;
+$button-enabled-active-bg: $secondary-color;
+$button-enabled-active-border: $secondary-color;
+$button-enabled-active-color: $primary-color;
+$button-enabled-focus-shadow: $primary-color-light;
+
+// Secondary
+
+// Success
+$button-success-bg: $secondary-color;
+$button-success-color: $primary-color;
+$button-success-border: $secondary-color;
+$button-success-enabled-hover-bg: $secondary-color;
+$button-success-enabled-hover-color: $primary-color;
+$button-success-enabled-hover-border: $secondary-color;
+$button-success-enabled-active-bg: $secondary-color;
+$button-success-enabled-active-border: $secondary-color;
+$button-success-enabled-active-color: $primary-color;
+$button-success-enabled-focus-shadow: $primary-color-light;
+
+//// Paginator
+$paginator-active-bg: $primary-color;
+$paginator-active-color: white;
+
+//// Table
+$column-sort-highlight-bg: $primary-color;
+$column-sort-highlight-color: white;
+
+// Selection
+$table-selection-highlight-bg: $primary-color;
+$table-selection-highlight-color: white;
+$table-selection-highlight-link: $secondary-color;
+
+//// Input
+$default-input-border: $ancillary-content-color;
+$default-input-hover-border: $primary-color;
+$default-input-focus-border: $secondary-color;
+$default-input-focus-outline: 0 0 0 0.1em $secondary-color;
+$default-input-error-outline: 0 0 0 0.1em red;
+
+// Selection (checkbox, select)
+$default-input-item-select-focus-border: $secondary-color;
+$default-input-item-select-focus-bg: white;
+$default-input-item-select-focus-color: $secondary-color;
+
+$default-input-item-select-active-border: $secondary-color;
+$default-input-item-select-active-bg: $secondary-color;
+$default-input-item-select-active-color: white;
+
+$default-input-item-select-active-hover-border: $secondary-color-light;
+$default-input-item-select-active-hover-bg: $secondary-color-light;
+$default-input-item-select-active-hover-color: white;
+
+$default-input-item-select-active-focus-border: $secondary-color;
+$default-input-item-select-active-focus-bg: $secondary-color;
+$default-input-item-select-active-focus-color: white;
+
+// Dropdown trigger
+$input-trigger: $primary-color;
+
+// Panel (dropdown)
+$input-highlight-bg: $primary-color;
+$input-highlight-color: white;
+
+// Date
+$input-datepicker-active-bg: $primary-color;
+$input-datepicker-active-color: white;
+$input-datepicker-today-bg: $secondary-color;
+$input-datepicker-today-color: $primary-color;
+$input-datepicker-arrows: $primary-color;
+
+//// Progressbar
+$progress-bar-bg: $secondary-color;
+
+// Media queries
+$media-query-lg: 992px;

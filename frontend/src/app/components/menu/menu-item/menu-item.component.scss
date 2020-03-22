@@ -1,0 +1,22 @@
+@import "../../../styles/global-variables.scss";
+
+.menu-item-wrapper {
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-bottom: 1px solid rgba(30, 67, 88, 0.2);
+    cursor: pointer;
+
+    &:hover {
+        background-color: $secondary-color-light;
+    }
+
+    .icon {
+        flex: 0 0 40px;
+    }
+
+    .name {
+        flex: 1 1 auto;
+    }
+}
