@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
+import { SampleListComponent } from './components/sample-list/sample-list.component';
 import { SampleComponent } from './components/sample/sample.component';
 import { AnotherPageComponent } from './components/another-page/another-page.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -14,6 +15,7 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     SampleComponent,
+    SampleListComponent,
     AnotherPageComponent,
     MenuComponent,
     MenuItemComponent,
