@@ -14,13 +14,17 @@ export default class Database {
     }
 
     private createConnection(): Promise<Connection> {
+        const dbParams: object = {
+            host: process.env.DB_HOST ?? 'localhost',
+            port: process.env.DB_PORT ?? '3306',
+            username: process.env.DB_USERNAME ?? 'root',
+            password: process.env.DB_PASSWORD ?? '',
+            database: process.env.DB_NAME ?? 'database',
+        };
+
         return createConnection({
             type: 'mysql',
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: 'mju76yhn',
-            database: 'flea',
+            ...dbParams,
             entities: [
                 __dirname + '/../../modules/**/*.entity.ts'
             ],

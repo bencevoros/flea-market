@@ -1,3 +1,6 @@
+import { config as envConfig } from 'dotenv';
+envConfig();
+
 import express from 'express';
 import path from 'path';
 import cors from 'cors';

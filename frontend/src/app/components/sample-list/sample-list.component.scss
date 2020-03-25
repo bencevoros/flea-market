@@ -1,3 +1,5 @@
+@import '../../styles/global-variables.scss';
+
 .container {
   display: flex;
   align-items: flex-start;
@@ -14,6 +16,16 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+ 
+@media screen and (min-width: $media-query-lg) {
+  .list-container {
+    width: 30vw;
+  }
+
+  .form {
+    width: 30vw;
+  }
 }
 
 .form > input {

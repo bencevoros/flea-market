@@ -1,5 +1,15 @@
 # FleaMarket
 
+## Environment
+
+Before running project, you need to create a `.env` file in the project root. The following properties need to declare in:
+
+    DB_HOST=<HOST OF THE DATABASE>
+    DB_PORT=<PORT OF THE DATABASE>
+    DB_NAME=<DATABASE NAME>
+    DB_USERNAME=<USERNAME FOR THE DATABASE>
+    DB_PASSWORD=<PASSWORD FOR THE USERNAME>
+
 ## Scripts
 
 ### Development

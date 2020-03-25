@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "flea-market"
+  "defaultProject": "flea-market",
+  "cli": {
+    "analytics": "f0cc044a-f90e-4db3-965e-d0f7ad1f8fec"
+  }
 }
