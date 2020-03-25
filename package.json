@@ -25,9 +25,12 @@
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mysql": "^2.18.1",
     "primeicons": "^2.0.0",
     "primeng": "^9.0.2",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^6.0.0",
+    "typeorm": "^0.2.24",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

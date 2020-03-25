@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
-import CRUDModel, { Model } from './crud.model';
+import CRUDModel from './crud.model';
 
 interface Controller<T> {
-  model: Model<T>;
+  model: CRUDModel<T>;
   create: (Request, Response) => void;
   read: (Request, Response) => void;
+  findById: (Request, Response) => void;
   delete: (Request, Response) => void;
   update: (Request, Response) => void;
 }
@@ -12,50 +13,75 @@ interface Controller<T> {
 class CrudController<T> implements Controller<T> {
   model: CRUDModel<T>;
 
-  constructor() {
-    this.model = new CRUDModel<T>();
+  constructor(entity: string) {
+    this.model = new CRUDModel<T>(entity);
   }
 
-  public create (req: Request, res: Response) {
-    const value: T = this.model.create(req.body);
-    res.send(value);
-  }
+  public async create (req: Request, res: Response) {
+    try {
+      await this.model.create(req.body);
 
-  public read (req: Request, res: Response) {
-    const value: T = this.model.read();
-    res.send(value);
-  }
-
-  public findById (req: Request, res: Response) {
-    if (!req.query.id) {
-      res.statusMessage = 'ID is required';
-      return res.sendStatus(400);
-    }
-
-    const value: T = this.model.findById(req.query.id);
-    res.send(value);
-  }
-
-  public update (req: Request, res: Response) {
-    const value: T = this.model.update(req.body);
-    res.send(value);
-  }
-
-  public delete (req: Request, res: Response) {
-    if (!req.query.id) {
-      res.statusMessage = 'ID is required';
-      return res.sendStatus(400);
-    }
-
-    const success: Boolean = this.model.delete(req.query.id);
-
-    if (success) {
       res.sendStatus(200);
-      return;
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  public async read (req: Request, res: Response) {
+    try {
+      const value: T[] = await this.model.read();
+
+      res.send(value);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  public async findById (req: Request, res: Response) {
+    if (!req.query.id) {
+      res.statusMessage = 'ID is required';
+      return res.sendStatus(400);
+    }
+    
+    try {
+      const value: T = await this.model.findById(req.query.id);
+      
+      res.send(value);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  public async update (req: Request, res: Response) {
+    const body = req.body;
+    if (!body.id) {
+      res.statusMessage = 'ID is required';
+      return res.sendStatus(400);
     }
 
-    res.statusMessage = 'The item cannot be deleted.';
-    res.sendStatus(400);
+    try {
+      await this.model.update(req.body);
+
+      res.sendStatus(200);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  public async delete (req: Request, res: Response) {
+    if (!req.query.id) {
+      res.statusMessage = 'ID is required';
+      return res.sendStatus(400);
+    }
+
+
+    try {
+      await this.model.delete(req.query.id);
+      
+      res.sendStatus(200);
+    } catch (err) {
+      res.status(500).send(err);
+    }
   }
 }
 
