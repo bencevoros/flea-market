@@ -1,7 +1,11 @@
+import { config as envConfig } from 'dotenv';
+envConfig();
+
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import router from './routes/routes';
+import 'reflect-metadata';
 
 const app: express.Application = express();
 const port = 3000;

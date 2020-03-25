@@ -1,37 +1,42 @@
+import Database, { Repository } from '../../shared/database/database';
+
 export interface Model<T> {
-  create: (Sample) => T;
-  read: () => T;
-  delete: (Number) => boolean;
-  update: (Sample) => T;
+  repository: Repository<T>;
+  create: (object: T) => Promise<void>;
+  read: () => Promise<T[]>;
+  delete: (id: number) => Promise<void>;
+  update: (object: T) => Promise<void>;
 }
-
+ 
 class CRUDModel<T> implements Model<T> {
-  public create (body: T) {
-    const response: T = { ...body, id: 1};
-    return response;
+  repository: Repository<T>;
+
+  constructor(entity: string) {
+    new Database().connect().then((connection) => {
+      this.repository = connection.getRepository(entity);
+    });
   }
 
-  public read (): T {
-    const response: T = { title: 'Hello world!', message: 'It works, so this is a message', id: 0 } as unknown as T;
-    return response;
+  public async create (body: T): Promise<void> {
+    await this.repository.save(body);
   }
 
-  public findById (id: number): T {
-    const response: T = { title: 'Hello world!', message: 'It works, so this is a message', id } as unknown as T;
-    return response;
+  public async read (): Promise<T[]> {
+    return await this.repository.find();
   }
 
-  public update (updates: T) {
-    return updates;
+  public async findById (id: number): Promise<T> {
+    return await this.repository.findOne(id);
   }
 
-  public delete (id: number) {
-    const rand = Math.random() * 10;
-    if (rand < 5) {
-      return true;
-    }
+  public async update (updates: T): Promise<void> {
+    await this.repository.save(updates);
+  }
 
-    return false;
+  public async delete (id: number): Promise<void> {
+    const entityToRemove = await this.repository.findOne(id);
+
+    await this.repository.remove(entityToRemove);
   }
 }
 

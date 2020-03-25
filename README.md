@@ -1,5 +1,15 @@
 # FleaMarket
 
+## Environment
+
+Before running project, you need to create a `.env` file in the project root. The following properties need to declare in:
+
+    DB_HOST=<HOST OF THE DATABASE>
+    DB_PORT=<PORT OF THE DATABASE>
+    DB_NAME=<DATABASE NAME>
+    DB_USERNAME=<USERNAME FOR THE DATABASE>
+    DB_PASSWORD=<PASSWORD FOR THE USERNAME>
+
 ## Scripts
 
 ### Development
@@ -27,7 +37,7 @@ Run `npm run start:prod` to build and run the project. The backend build artifac
       - module.controller.ts - Define here the business logic
       - module.model.ts - Define here the database manipulation
       - module.route.ts - Define here the endpoints for the module
-      - module.ts - Define here the module schema
+      - module.entity.ts - Define here the module entity. The orm get table and column properties from here.
   - middleware/ - Here define the middleware functions e.g. auth for routes
   - server.ts - Main server file
 - frontend/

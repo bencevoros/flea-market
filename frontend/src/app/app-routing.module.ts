@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SampleComponent } from './components/sample/sample.component';
+import { SampleListComponent } from './components/sample-list/sample-list.component';
 import { AnotherPageComponent } from './components/another-page/another-page.component';
 
 const routes: Routes = [
   {
-    path: 'sample',
-    component: SampleComponent,
-    data: { title: 'Sample' }
+    path: 'samples',
+    component: SampleListComponent,
+    data: { title: 'Samples' }
   },
   {
     path: 'another',
@@ -16,7 +16,7 @@ const routes: Routes = [
     data: { title: 'Another' }
   },
   { path: '**',
-    redirectTo: '/sample',
+    redirectTo: '/samples',
     pathMatch: 'full'
   },
 ];

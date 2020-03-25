@@ -45,22 +45,17 @@ export class SampleService {
     };
     return this.http.put<Sample>(this.sampleUrl, sample, httpOptions)
       .pipe(
-        tap((sample: Sample) => {
-          return sample;
-        }),
         catchError(this.handleError())
       )
   }
 
-  create(sample: Sample): Observable<Sample | {}> {
-    const httpOptions = {
+  create(sample: Sample) {
+    const httpOptions: object = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+      responseType: 'text',
     };
     return this.http.post<Sample>(this.sampleUrl, sample, httpOptions)
       .pipe(
-        tap((sample: Sample) => {
-          return sample;
-        }),
         catchError(this.handleError())
       )
   }
