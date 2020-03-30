@@ -2,4 +2,7 @@
     <div *ngFor="let menuItem of menuList">
         <app-menu-item [menuItem]="menuItem"></app-menu-item>
     </div>
+    <div *ngIf="isLoggedIn">
+      <button (click)="onLogOutClick()">Logout</button>
+    </div>
 </div>

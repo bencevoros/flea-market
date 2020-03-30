@@ -10,7 +10,11 @@ import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuItemComponent } from './components/menu/menu-item/menu-item.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { LoginComponent } from './components/login/login.component';
 import { AppComponent } from './app.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { AnonymusGuardService } from './services/anonymus-guard.service';
 
 @NgModule({
   declarations: [
@@ -21,14 +25,19 @@ import { AppComponent } from './app.component';
     MenuComponent,
     MenuItemComponent,
     HeaderComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    AuthGuardService,
+    AuthService,
+    AnonymusGuardService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
