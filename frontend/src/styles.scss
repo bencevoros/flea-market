@@ -3,3 +3,27 @@
 body {
   margin: 0px;
 }
+
+.info {
+  position: absolute;
+  color: white;
+  background: rgba(70, 180, 219, .7);
+  padding: 5px 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 30%;
+  text-align: center;
+}
+
+.error {
+  position: absolute;
+  color: white;
+  background: rgba(171, 0, 0, .7);
+  padding: 5px 0;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 30%;
+  text-align: center;
+}

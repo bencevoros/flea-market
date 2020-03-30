@@ -9,6 +9,7 @@ import { AnotherPageComponent } from './components/another-page/another-page.com
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuItemComponent } from './components/menu/menu-item/menu-item.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
     MenuComponent,
     MenuItemComponent,
     HeaderComponent,
+    RegistrationComponent
   ],
   imports: [
     AppRoutingModule,

@@ -14,6 +14,7 @@ export class MenuService {
         return of([
             { id: 1, name: 'Sample', link: 'sample' },
             { id: 2, name: 'Another', link: 'another' },
+            { id: 3, name: 'Registration', link: 'registration' },
         ]);
 
     }

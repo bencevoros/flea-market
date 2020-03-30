@@ -42,10 +42,10 @@ class CrudController<T> implements Controller<T> {
       res.statusMessage = 'ID is required';
       return res.sendStatus(400);
     }
-    
+
     try {
       const value: T = await this.model.findById(req.query.id);
-      
+
       res.send(value);
     } catch (err) {
       res.status(500).send(err);
@@ -77,7 +77,7 @@ class CrudController<T> implements Controller<T> {
 
     try {
       await this.model.delete(req.query.id);
-      
+
       res.sendStatus(200);
     } catch (err) {
       res.status(500).send(err);

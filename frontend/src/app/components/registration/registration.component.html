@@ -1,0 +1,14 @@
+<div *ngIf="info">
+  <h5 class="info">{{ info.message }}</h5>
+</div>
+<div *ngIf="error">
+  <h5 class="error">{{ error.message }}</h5>
+</div>
+
+<div class="container">
+  <form>
+    <input (keyup)="onInputChange($event, 'email')" type="text" placeholder="Email" />
+    <input (keyup)="onInputChange($event, 'password')" type="password" placeholder="Password" />
+    <button (click)="onSubmit($event)">Register</button>
+  </form>
+</div>

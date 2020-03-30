@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SampleListComponent } from './components/sample-list/sample-list.component';
 import { AnotherPageComponent } from './components/another-page/another-page.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,11 @@ const routes: Routes = [
     path: 'another',
     component: AnotherPageComponent,
     data: { title: 'Another' }
+  },
+  {
+    path: 'registration',
+    component: RegistrationComponent,
+    data: { title: 'Registration' }
   },
   { path: '**',
     redirectTo: '/samples',
