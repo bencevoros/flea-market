@@ -9,6 +9,7 @@ export default class Database {
         }
 
         this.connection = await this.createConnection();
+        await this.connection.synchronize();
 
         return this.connection;
     }

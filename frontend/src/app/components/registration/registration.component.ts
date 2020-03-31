@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../../services/registration.service';
 import { User } from '../../models/user';
+import { Info } from '../../models/info';
 
 @Component({
   selector: 'registration',
@@ -37,12 +38,10 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.create(user)
       .subscribe(
         () => {
-          this.info = {
-            message: 'Registration success. You will be redirected to the Login page.'
-          };
+          this.info = new Info('Registration success. You will be redirected to the Login page.');
 
           setTimeout(() => {
-            this.router.navigateByUrl('/samples');
+            this.router.navigateByUrl('/items');
           }, 5000);
         },
         (error: Error) => {

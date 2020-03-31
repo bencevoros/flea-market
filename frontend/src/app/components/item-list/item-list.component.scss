@@ -1,0 +1,21 @@
+@import '../../styles/global-variables.scss';
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.list-container {
+  width: 100%;
+}
+
+.list-item {
+  margin-right: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 1px 1px 3px 1px lightgray;
+  margin-bottom: 10px;
+}
