@@ -1,0 +1,14 @@
+<div *ngIf="error">
+  <h5 class="error">{{ error.message }}</h5>
+</div>
+
+<h3>Items</h3>
+
+<div *ngIf="items && items.length" class="list-container">
+  <div *ngFor="let item of items">
+    <div class="list-item" [routerLink]="['/item', item.id]">
+      <p>{{ item.name }}</p>
+      <p>{{ item.price }}</p>
+    </div>
+  </div>
+</div>

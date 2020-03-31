@@ -18,7 +18,7 @@ export class MenuService {
 
     getMenuList(): Observable<MenuItem[]> {
       const menu = [
-        { id: 1, name: 'Sample', link: 'sample' },
+        { id: 1, name: 'Items', link: 'items' },
       ];
 
       if (this.anonymGuard.canActivate()) {
@@ -29,6 +29,7 @@ export class MenuService {
       } else if (this.authGuard.canActivate()) {
         menu.push(
           { id: 2, name: 'Another', link: 'another' },
+          { id: 5, name: 'Create item', link: 'create-item' },
         );
       }
 

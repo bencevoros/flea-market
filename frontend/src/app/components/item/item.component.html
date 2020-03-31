@@ -1,0 +1,13 @@
+<div class="data">
+  <div class="title">
+    <h5>{{ item.name }}</h5>
+    <div *ngIf="isOwnItem" >
+      <div class="delete" (click)="delete()">X</div>
+    </div>
+  </div>
+  <p>{{ item.description }}</p>
+  <p>{{ item.price }}</p>
+  <div *ngIf="isOwnItem" class="footer">
+    <a [routerLink]="['/edit-item', item.id]">Edit item</a>
+  </div>
+</div>

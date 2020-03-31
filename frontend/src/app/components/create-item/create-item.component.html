@@ -1,0 +1,15 @@
+<div *ngIf="info">
+  <h5 class="info">{{ info.message }}</h5>
+</div>
+<div *ngIf="error">
+  <h5 class="error">{{ error.message }}</h5>
+</div>
+<h3>{{ isEdit ? 'Edit item' : 'Create item'}}</h3>
+<div class="container">
+  <form class="form">
+    <input type="text" placeholder="Name" [(value)]="itemValue.name" (change)="change($event, 'name')"/>
+    <input type="text" placeholder="Description" [(value)]="itemValue.description" (change)="change($event, 'description')"/>
+    <input type="number" placeholder="Price" [(value)]="itemValue.price" (change)="change($event, 'price')"/>
+    <button type="submit" (click)="submit($event)">{{ isEdit ? 'Save' : 'Create'}}</button>
+  </form>
+</div>

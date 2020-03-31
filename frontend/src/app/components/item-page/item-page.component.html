@@ -1,0 +1,8 @@
+<div *ngIf="info">
+  <h5 class="info">{{ info.message }}</h5>
+</div>
+<div *ngIf="error">
+  <h5 class="error">{{ error.message }}</h5>
+</div>
+<h3>Item page</h3>
+<item *ngIf="item" [item]="item" [isOwnItem]="isOwnedItem" (deleteItem)="delete($event)"></item>

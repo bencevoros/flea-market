@@ -23,6 +23,22 @@ export class AuthService {
         }
     }
 
+    public getUserId(): number | undefined {
+        const auth = localStorage.getItem('auth');
+        
+        if (!auth) {
+            return;
+        }
+
+        try {
+            const token = JSON.parse(auth).token;
+
+            return this.jwtHelper.decodeToken(token).userId;
+        } catch (err) {
+            return undefined;
+        }
+    }
+
     public removeAuth() {
         localStorage.removeItem('auth');
     }

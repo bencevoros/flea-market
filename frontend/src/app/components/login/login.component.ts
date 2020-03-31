@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../services/login.service';
 import { User } from '../../models/user';
+import { Info } from '../../models/info';
 
 @Component({
     selector: 'login',
@@ -36,9 +37,7 @@ export class LoginComponent {
                     return this.error = new Error('Login failed.');
                 }
 
-                this.info = {
-                    message: 'Login success. You will be redirected to the home page.'
-                };
+                this.info = new Info('Login success. You will be redirected to the home page.');
 
                 localStorage.setItem('auth', JSON.stringify({ token: response.token, email: this.email}));
 
