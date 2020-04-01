@@ -28,8 +28,7 @@ export class MenuService {
         );
       } else if (this.authGuard.canActivate()) {
         menu.push(
-          { id: 2, name: 'Another', link: 'another' },
-          { id: 5, name: 'Create item', link: 'create-item' },
+          { id: 2, name: 'Create item', link: 'create-item' },
         );
       }
 

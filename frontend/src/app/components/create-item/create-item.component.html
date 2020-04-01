@@ -1,7 +1,7 @@
-<div *ngIf="info">
+<div *ngIf="info" class="message-container">
   <h5 class="info">{{ info.message }}</h5>
 </div>
-<div *ngIf="error">
+<div *ngIf="error" class="message-container">
   <h5 class="error">{{ error.message }}</h5>
 </div>
 <h3>{{ isEdit ? 'Edit item' : 'Create item'}}</h3>

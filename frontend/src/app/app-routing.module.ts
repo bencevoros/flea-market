@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AnonymusGuardService } from './services/anonymus-guard.service';
 
-import { SampleListComponent } from './components/sample-list/sample-list.component';
-import { AnotherPageComponent } from './components/another-page/another-page.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
@@ -16,17 +14,6 @@ const routes: Routes = [
     path: 'items',
     component: ItemListComponent,
     data: { title: 'Items' },
-  },
-  {
-    path: 'samples',
-    component: SampleListComponent,
-    data: { title: 'Samples' }
-  },
-  {
-    path: 'another',
-    component: AnotherPageComponent,
-    data: { title: 'Another' },
-    canActivate: [AuthGuardService],
   },
   {
     path: 'item/:id',

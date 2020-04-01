@@ -1,5 +1,5 @@
-class SampleModel {
+class ItemModel {
 
 }
 
-export default SampleModel;
+export default ItemModel;

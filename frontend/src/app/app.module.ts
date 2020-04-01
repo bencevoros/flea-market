@@ -3,13 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
-import { SampleListComponent } from './components/sample-list/sample-list.component';
-import { SampleComponent } from './components/sample/sample.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemComponent } from './components/item/item.component';
 import { ItemPage } from './components/item-page/item-page.component';
 import { CreateItemComponent } from './components/create-item/create-item.component';
-import { AnotherPageComponent } from './components/another-page/another-page.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuItemComponent } from './components/menu/menu-item/menu-item.component';
@@ -23,9 +20,6 @@ import { AnonymusGuardService } from './services/anonymus-guard.service';
 @NgModule({
   declarations: [
     AppComponent,
-    SampleComponent,
-    SampleListComponent,
-    AnotherPageComponent,
     MenuComponent,
     MenuItemComponent,
     HeaderComponent,
