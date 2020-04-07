@@ -1,19 +1,19 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export default class Item {
-
-    @Column("text")
-    name: string;
-
-    @Column("text")
-    description: string;
+export default class Bid {
 
     @Column("int")
-    price: string;
+    amount: string;
+
+    @Column("date")
+    date: string;
 
     @Column("int")
     userId: string;
+
+    @Column("int")
+    itemId: string;
 
     @PrimaryGeneratedColumn()
     id: number;
