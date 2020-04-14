@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { CreateItemComponent } from './components/create-item/create-item.component';
 import { ItemPage } from './components/item-page/item-page.component';
+import { UserPageComponent } from "./components/user-page/user-page.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,12 @@ const routes: Routes = [
     path: 'registration',
     component: RegistrationComponent,
     data: { title: 'Registration' },
+    canActivate: [AnonymusGuardService],
+  },
+  {
+    path: 'user-page/:id',
+    component: UserPageComponent,
+    data:{ title: 'User-page' },
     canActivate: [AnonymusGuardService],
   },
   {

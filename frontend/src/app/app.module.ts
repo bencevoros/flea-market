@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { AnonymusGuardService } from './services/anonymus-guard.service';
+import { UserPageComponent } from "./components/user-page/user-page.component";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AnonymusGuardService } from './services/anonymus-guard.service';
     ItemListComponent,
     ItemPage,
     CreateItemComponent,
+    UserPageComponent,
   ],
   imports: [
     AppRoutingModule,
