@@ -7,7 +7,7 @@
   </div>
   <p>{{ item.description }}</p>
   <p>{{ item.price }}</p>
-  <div class="container" *ngIf="isLoggedIn">
+  <div class="container" *ngIf="isLoggedIn && !isOwnItem" >
     <form class="form">
       <input type="number" placeholder="Price" [(value)]="item.price" (change)="changeBidCost($event, 'amount')" [(min)]="item.price"/>
       <button type="submit" (click)="submitBid($event)">Place Bid</button>
