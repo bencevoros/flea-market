@@ -16,8 +16,7 @@
   <div *ngIf="bids && bids.length" class="list-container">
     <div *ngFor="let bid of bids">
       <div class="list-item">
-        <p>{{ bid.amount }}</p>
-        <p>{{ bid.date }}</p>
+        <p>amount: {{ bid.amount }} date: {{ bid.date }}</p>
       </div>
     </div>
   </div>

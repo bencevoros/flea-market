@@ -3,6 +3,7 @@ import { Item } from '../../models/item';
 import { Bid } from '../../models/bid';
 import { BidService } from '../../services/bid.service';
 import { AuthService } from '../../services/auth.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'item',
@@ -42,18 +43,19 @@ export class ItemComponent {
   }
 
   getBids(): void {
-
-      this.bidService.readByItemId(this.item)
+    this.bidService.readByItemId(this.item)
           .subscribe(
-              (response: { foundBids: Bid[] }) => {
+            (response: { foundBids: Bid[] }) => {
 
               this.bids = response.foundBids;
-
-              },
-              (error: Error) => {
-                  this.error = error;
-              }
-       );
+              this.bids.sort((a, b) => a.date ? 1 : a.date > b.date ? -1 : 0);
+              this.price = this.bids[0].amount;
+              
+            },
+            (error: Error) => {
+                this.error = error;
+            }
+    );
   }
 
   ngOnInit() {
