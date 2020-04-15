@@ -6,12 +6,20 @@
     </div>
   </div>
   <p>{{ item.description }}</p>
-  <p>{{ item.price }}</p>
+  <p>{{ price }}</p>
   <div class="container" *ngIf="isLoggedIn && !isOwnItem" >
     <form class="form">
       <input type="number" placeholder="Price" [(value)]="item.price" (change)="changeBidCost($event, 'amount')" [(min)]="item.price"/>
       <button type="submit" (click)="submitBid($event)">Place Bid</button>
     </form>
+  </div>
+  <div *ngIf="bids && bids.length" class="list-container">
+    <div *ngFor="let bid of bids">
+      <div class="list-item">
+        <p>{{ bid.amount }}</p>
+        <p>{{ bid.date }}</p>
+      </div>
+    </div>
   </div>
   
   <div *ngIf="isOwnItem" class="footer">

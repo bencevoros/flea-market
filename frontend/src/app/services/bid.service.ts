@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 import { Bid } from '../models/bid';
+import { Item } from '../models/item';
 import { Error } from '../models/error';
 
 @Injectable({
@@ -80,4 +81,16 @@ export class BidService {
         catchError(this.handleError())
       );
   }
+
+  readByItemId(item: Item): Observable<Object>{
+    return this.http.post(this.bidUrl, item)
+      .pipe(
+        tap((object: Object) => {
+          console.log(object);
+          return object;
+        }),
+        catchError(this.handleError())
+      )
+  }
+  
 }
