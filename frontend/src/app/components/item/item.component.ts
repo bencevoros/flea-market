@@ -16,6 +16,8 @@ export class ItemComponent {
     private auth: AuthService,
     private bidService: BidService,
   ) { }
+  
+  public isLoggedIn: boolean = false;
 
   @Input()
   item: Item;
@@ -40,6 +42,8 @@ export class ItemComponent {
 
   ngOnInit() {
     this.bidValue.amount = this.item.price;
+
+    this.isLoggedIn = this.auth.isAuthenticated();
   }
 
   changeBidCost(event, key: string): void {
