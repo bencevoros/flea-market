@@ -28,15 +28,18 @@ export class UserPageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+//default test sample
+    this.user = new User('sample@','pwsample',999999);
 
-    this.routeSub = this.route.params.subscribe(params => {
-      this.userService.readById(params.id)
+    this.routeSub = this.route.params.subscribe(() => {
+      this.userService.readById(this.auth.getUserId())
         .subscribe(
           (userResp: User) => {
             this.error = undefined;
             this.info = undefined;
-            this.user = userResp;
-            this.isOwnedUser = this.auth.getUserId() === userResp.id;
+            this.user.password = userResp.password;
+            this.user.email = userResp.email;
+            this.user.id = this.auth.getUserId();
           },
           (error: Error) => {
             this.error = error;
@@ -59,7 +62,7 @@ export class UserPageComponent implements OnInit {
           this.info = new Info('User deleted. You will be redirected.');
 
           setTimeout(() => {
-            this.router.navigateByUrl('users');
+            this.router.navigateByUrl('items');
           });
         },
         (error: Error) => {

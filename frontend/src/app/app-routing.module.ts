@@ -40,10 +40,10 @@ const routes: Routes = [
     canActivate: [AnonymusGuardService],
   },
   {
-    path: 'user-page/:id',
+    path: 'user-page',
     component: UserPageComponent,
     data:{ title: 'User-page' },
-    canActivate: [AnonymusGuardService],
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login',

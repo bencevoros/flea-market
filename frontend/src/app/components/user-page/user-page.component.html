@@ -5,3 +5,4 @@
   <h5 class="error">{{ error.message }}</h5>
 </div>
 <h3>User page</h3>
+<user *ngIf="user" [user]="user" (deleteUser)="delete($event)"></user>

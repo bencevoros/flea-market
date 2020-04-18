@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
           this.info = new Info('Registration success. You will be redirected to the Login page.');
 
           setTimeout(() => {
-            this.router.navigateByUrl('/items');
+            this.router.navigateByUrl('/login');
           }, 5000);
         },
         (error: Error) => {

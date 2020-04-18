@@ -17,6 +17,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { AnonymusGuardService } from './services/anonymus-guard.service';
 import { UserPageComponent } from "./components/user-page/user-page.component";
+import { UserComponent } from "./components/user/user.component";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { UserPageComponent } from "./components/user-page/user-page.component";
     ItemPage,
     CreateItemComponent,
     UserPageComponent,
+    UserComponent,
   ],
   imports: [
     AppRoutingModule,
