@@ -1,0 +1,27 @@
+<div class="data">
+  <div class="title">
+    <h5>{{ item.name }}</h5>
+    <div *ngIf="isOwnItem" >
+      <div class="delete" (click)="delete()">X</div>
+    </div>
+  </div>
+  <p>{{ item.description }}</p>
+  <p>{{ price }}</p>
+  <div class="container" *ngIf="isLoggedIn && !isOwnItem" >
+    <form class="form">
+      <input type="number" placeholder="Price" [(value)]="item.price" (change)="changeBidCost($event, 'amount')" [(min)]="item.price"/>
+      <button type="submit" (click)="submitBid($event)">Place Bid</button>
+    </form>
+  </div>
+  <div *ngIf="bids && bids.length" class="list-container">
+    <div *ngFor="let bid of bids">
+      <div class="list-item">
+        <p>amount: {{ bid.amount }} date: {{ bid.date }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="isOwnItem" class="footer">
+    <a [routerLink]="['/edit-item', item.id]">Edit item</a>
+  </div>
+</div>

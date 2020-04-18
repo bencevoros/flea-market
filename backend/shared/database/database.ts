@@ -16,11 +16,11 @@ export default class Database {
 
     private createConnection(): Promise<Connection> {
         const dbParams: object = {
-            host: process.env.DB_HOST ?? 'localhost',
+            host: process.env.DB_HOST ?? '127.0.0.1',
             port: process.env.DB_PORT ?? '3306',
             username: process.env.DB_USERNAME ?? 'root',
-            password: process.env.DB_PASSWORD ?? '',
-            database: process.env.DB_NAME ?? 'database',
+            password: process.env.DB_PASSWORD ?? 'secret',
+            database: process.env.DB_NAME ?? 'test',
         };
 
         return createConnection({

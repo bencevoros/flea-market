@@ -1,0 +1,23 @@
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.data {
+  box-shadow: 1px 1px 3px 1px lightgray;
+  padding: 5px 40px;
+  width: --webkit-fill-available;
+  margin-bottom: 10px;
+}
+
+.delete {
+  cursor: pointer;
+  padding: 10px;
+  color: rgba(171, 0, 0, .7);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+}
