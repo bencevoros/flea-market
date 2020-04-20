@@ -42,14 +42,20 @@ export class ItemComponent {
     this.deleteItem.emit(this.item.id);
   }
 
-  getBids(): void {
+  initializeBidding(): void {
     this.bidService.readByItemId(this.item)
           .subscribe(
             (response: { foundBids: Bid[] }) => {
 
-              this.bids = response.foundBids;
-              this.bids.sort((a, b) => a.date ? 1 : a.date > b.date ? -1 : 0);
-              this.price = this.bids[0].amount;
+              if(response.foundBids && response.foundBids.length) {
+                this.bids = response.foundBids;
+                this.bids.sort((a, b) => a.date ? 1 : a.date > b.date ? -1 : 0);
+                this.price = this.bids[0].amount + 1;
+                this.bidValue.amount = this.bids[0].amount + 1;
+              }
+              else {
+                this.price = this.item.price
+              }
               
             },
             (error: Error) => {
@@ -59,17 +65,8 @@ export class ItemComponent {
   }
 
   ngOnInit() {
-    this.bidValue.amount = this.item.price;
-
     this.isLoggedIn = this.auth.isAuthenticated();
-    this.getBids();
-    if (this.bids && this.bids.length) {
-
-    }
-    else {
-      
-    }
-    this.price = this.item.price;
+    this.initializeBidding();
   }
 
   changeBidCost(event, key: string): void {
