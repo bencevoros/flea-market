@@ -31,7 +31,6 @@ export class CreateItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.hasBids = true;
     this.route.params.subscribe((params) => {
       if (params.id) {
         this.isEdit = true;
@@ -39,8 +38,12 @@ export class CreateItemComponent implements OnInit {
           .subscribe((item: Item) => {
             console.log(item);
             this.itemValue = item;
-            this.origPrice = item.price
-            this.checkBids(this.itemValue);
+            if (this.isEdit) {
+              this.origPrice = item.price
+              this.checkBids(this.itemValue);
+            } else {
+              this.hasBids = false;
+            }
           },
           (error: Error) => {
             this.error = error;

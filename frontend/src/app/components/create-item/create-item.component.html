@@ -5,7 +5,6 @@
   <h5 class="error">{{ error.message }}</h5>
 </div>
 <h3>{{ isEdit ? 'Edit item' : 'Create item'}}</h3>
-<h3>{{ hasBids ? 'has' : 'nope'}}</h3>
 <div class="container">
   <form class="form">
     <input type="text" placeholder="Name" [(value)]="itemValue.name" (change)="change($event, 'name')"/>
