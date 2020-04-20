@@ -4,7 +4,9 @@ import { Error } from '../../models/error';
 import { ItemService } from '../../services/item.service';
 import { Info } from '../../models/info';
 import { AuthService } from '../../services/auth.service';
+import { BidService } from '../../services/bid.service';
 import { ActivatedRoute } from '@angular/router';
+import { Bid } from '../../models/bid';
 
 @Component({
   selector: 'create-item',
@@ -14,6 +16,8 @@ import { ActivatedRoute } from '@angular/router';
 export class CreateItemComponent implements OnInit {
   error: Error | undefined;
   info: Info | undefined;
+  hasBids: boolean;
+  origPrice: number;
   itemValue: Item = {
     name: '', price: 0, description: ''    
   };
@@ -21,11 +25,13 @@ export class CreateItemComponent implements OnInit {
 
   constructor(
     private itemService: ItemService,
+    private bidService: BidService,
     private auth: AuthService,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.hasBids = true;
     this.route.params.subscribe((params) => {
       if (params.id) {
         this.isEdit = true;
@@ -33,12 +39,34 @@ export class CreateItemComponent implements OnInit {
           .subscribe((item: Item) => {
             console.log(item);
             this.itemValue = item;
+            this.origPrice = item.price
+            this.checkBids(this.itemValue);
           },
           (error: Error) => {
             this.error = error;
           });
       }
     })
+  }
+
+  //Ez egy elég lusta módja annak hogy ellenőrizzük van-e bid szerintem, de ha valaki akarja átírhatja ;^)
+  checkBids(item: Item){
+      this.bidService.readByItemId(this.itemValue)
+      .subscribe(
+        (response: { foundBids: Bid[] }) => {
+  
+          if(response.foundBids.length != 0) {
+            this.hasBids = true;
+          }
+          else {
+            this.hasBids = false;
+          }
+          
+        },
+        (error: Error) => {
+            this.error = error;
+        }
+      );
   }
 
   change(event, key: string): void {
@@ -90,6 +118,16 @@ export class CreateItemComponent implements OnInit {
 
     if (!this.itemValue.name || !this.itemValue.price) {
       this.error = new Error('Name and price are required!');
+      return;
+    }
+
+    if (this.itemValue.price < 0) {
+      this.error = new Error('The items price can not be smaller than 0!');
+      return;
+    }
+
+    if (this.hasBids && this.itemValue.price != this.origPrice) {
+      this.error = new Error('The price of an item with active bids can not be edited!');
       return;
     }
 
