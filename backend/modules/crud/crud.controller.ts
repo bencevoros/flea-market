@@ -46,9 +46,9 @@ class CrudController<T> implements Controller<T> {
     try {
       const value: T = await this.model.findById(req.query.id);
 
-      res.send(value);
+     return  res.send(value);
     } catch (err) {
-      res.status(500).send(err);
+     return  res.status(500).send(err);
     }
   }
 

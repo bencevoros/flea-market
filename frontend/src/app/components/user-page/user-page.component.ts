@@ -5,6 +5,7 @@ import { User } from '../../models/user';
 import { Info } from '../../models/info';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { EmailService } from '../../services/email.service';
 
 @Component({
   selector: 'user-page',
@@ -12,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit {
+
   email: string;
   password: string;
   info: { message: string } | undefined;
@@ -25,11 +27,12 @@ export class UserPageComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private auth: AuthService,
+    private emailS: EmailService
   ) { }
 
   ngOnInit() {
 //default test sample
-    this.user = new User('sample@','pwsample',999999);
+    this.user = new User('Loading','Loading',-1);
 
     this.routeSub = this.route.params.subscribe(() => {
       this.userService.readById(this.auth.getUserId())
@@ -53,6 +56,13 @@ export class UserPageComponent implements OnInit {
   }
 
   delete(): void {
+    this.auth.removeAuth();
+    this.emailS.sendEmail("delete",this.user.email).subscribe(
+      () => { },
+      (error: Error) => {
+        this.error = error;
+      }
+    );
     this.error = undefined;
     this.info = undefined;
 
@@ -69,5 +79,6 @@ export class UserPageComponent implements OnInit {
           this.error = error;
         }
       );
+    window.location.reload();
   }
 }

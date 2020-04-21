@@ -16,11 +16,11 @@ export default class Database {
 
     private createConnection(): Promise<Connection> {
         const dbParams: object = {
-            host: process.env.DB_HOST ?? 'sql7.freemysqlhosting.net',
+            host: process.env.DB_HOST ?? 'remotemysql.com',
             port: process.env.DB_PORT ?? '3306',
-            username: process.env.DB_USERNAME ?? 'sql7333495',
-            password: process.env.DB_PASSWORD ?? '1h2yfAI91R',
-            database: process.env.DB_NAME ?? 'sql7333495',
+            username: process.env.DB_USERNAME ?? 'bMBKvDNiWG',
+            password: process.env.DB_PASSWORD ?? '4hHrSSYv6n',
+            database: process.env.DB_NAME ?? 'bMBKvDNiWG',
         };
 
         return createConnection({

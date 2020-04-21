@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 
+
 @Component({
   selector: 'user',
   templateUrl: './user.component.html',
@@ -26,4 +27,5 @@ export class UserComponent {
   delete(): void {
     this.deleteUser.emit(this.user);
   }
+
 }
