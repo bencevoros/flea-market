@@ -5,4 +5,7 @@
   <h5 class="error">{{ error.message }}</h5>
 </div>
 <h3>User page</h3>
-<user *ngIf="user" [user]="user" (deleteUser)="delete($event)"></user>
+<div *ngIf="info; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock> <user *ngIf="user" [user]="user"></user></ng-template>
+<ng-template #elseBlock> <user *ngIf="user" [user]="user" (deleteUser)="delete($event)"></user></ng-template>
+

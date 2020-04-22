@@ -9,6 +9,8 @@
     <form>
         <input (keyup)="onInputChange($event, 'email')" type="text" placeholder="Email" />
         <input (keyup)="onInputChange($event, 'password')" type="password" placeholder="Password" />
-        <button (click)="onSubmit($event)">Login</button>
+      <div *ngIf="info; then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock><button  [disabled]="true" (click)="onSubmit($event)">Login</button></ng-template>
+      <ng-template #elseBlock><button  (click)="onSubmit($event)">Login</button></ng-template>
     </form>
 </div>

@@ -16,11 +16,11 @@ export default class Database {
 
     private createConnection(): Promise<Connection> {
         const dbParams: object = {
-            host: process.env.DB_HOST ?? 'remotemysql.com',
+            host: process.env.DB_HOST ?? "127.0.0.1",
             port: process.env.DB_PORT ?? '3306',
-            username: process.env.DB_USERNAME ?? 'bMBKvDNiWG',
-            password: process.env.DB_PASSWORD ?? '4hHrSSYv6n',
-            database: process.env.DB_NAME ?? 'bMBKvDNiWG',
+            username: process.env.DB_USERNAME ?? 'test',
+            password: process.env.DB_PASSWORD ?? 'test',
+            database: process.env.DB_NAME ?? 'test',
         };
 
         return createConnection({

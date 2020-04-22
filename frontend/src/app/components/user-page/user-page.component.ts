@@ -56,29 +56,31 @@ export class UserPageComponent implements OnInit {
   }
 
   delete(): void {
-    this.auth.removeAuth();
-    this.emailS.sendEmail("delete",this.user.email).subscribe(
-      () => { },
-      (error: Error) => {
-        this.error = error;
-      }
-    );
+
+
     this.error = undefined;
     this.info = undefined;
 
     this.userService.delete(this.user)
-      .subscribe(
-        () => {
+      .subscribe(() => {
           this.info = new Info('User deleted. You will be redirected.');
-
+          this.auth.removeAuth();
           setTimeout(() => {
+            this.emailS.sendEmail("delete",this.user.email).subscribe(
+              () => { },
+              (error: Error) => {
+                this.error = error;
+              }
+            );
             this.router.navigateByUrl('items');
-          });
+            window.location.reload();
+          },3000);
+
         },
         (error: Error) => {
           this.error = error;
         }
       );
-    window.location.reload();
+
   }
 }
