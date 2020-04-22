@@ -3,7 +3,6 @@ import { Item } from '../../models/item';
 import { Bid } from '../../models/bid';
 import { BidService } from '../../services/bid.service';
 import { AuthService } from '../../services/auth.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'item',
@@ -44,23 +43,19 @@ export class ItemComponent {
 
   initializeBidding(): void {
     this.bidService.readByItemId(this.item)
-          .subscribe(
-            (response: { foundBids: Bid[] }) => {
-
-              if(response.foundBids && response.foundBids.length) {
-                this.bids = response.foundBids;
-                this.bids.sort((a, b) => a.date ? 1 : a.date > b.date ? -1 : 0);
-                this.price = this.bids[0].amount + 1;
-                this.bidValue.amount = this.bids[0].amount + 1;
-              }
-              else {
-                this.price = this.item.price
-              }
-              
-            },
-            (error: Error) => {
-                this.error = error;
-            }
+      .subscribe(
+        (response: { foundBids: Bid[] }) => {
+          if(response.foundBids && response.foundBids.length) {
+            this.bids = response.foundBids;
+            this.bids.sort((a, b) => a.date ? 1 : a.date > b.date ? -1 : 0);
+            this.bidValue.amount = this.bids[0].amount + 1;
+          }
+          this.price = this.item.price
+          
+        },
+        (error: Error) => {
+          this.error = error;
+        }
     );
   }
 
@@ -78,10 +73,8 @@ export class ItemComponent {
     this.bidValue.date = new Date();
     this.bidValue.userId = this.auth.getUserId();
     this.bidValue.itemId = this.item.id;
-   
-    console.log("Amount: "+this.bidValue.amount+"\nDate:"+this.bidValue.date);
 
-    if (this.bidValue.amount < this.item.price) {
+    if (this.bidValue.amount <= this.item.price) {
       this.error = new Error('The bid amount cannot be smaller than the price of the item!');
       return;
     }
@@ -89,6 +82,7 @@ export class ItemComponent {
     this.bidService.create(this.bidValue)
       .subscribe(
         () => {
+          this.price = this.bidValue.amount;
           this.bidValue.amount = 0;
           this.bidValue.date = new Date();
           this.bidValue.userId = undefined;

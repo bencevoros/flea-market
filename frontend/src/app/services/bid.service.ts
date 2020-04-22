@@ -83,10 +83,9 @@ export class BidService {
   }
 
   readByItemId(item: Item): Observable<Object>{
-    return this.http.post(this.bidUrl, item)
+    return this.http.get(this.bidUrl + '/findByItemId' + '?itemId=' + item.id)
       .pipe(
         tap((object: Object) => {
-          console.log(object);
           return object;
         }),
         catchError(this.handleError())

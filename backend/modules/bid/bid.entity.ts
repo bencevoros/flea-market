@@ -6,7 +6,7 @@ export default class Bid {
     @Column("int")
     amount: string;
 
-    @Column("date")
+    @Column("timestamp")
     date: string;
 
     @Column("int")
