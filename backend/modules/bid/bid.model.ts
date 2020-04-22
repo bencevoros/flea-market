@@ -7,6 +7,7 @@ export interface BidModelInterface {
     repository: Repository<Bid>;
     itemRepository: Repository<Item>;
     findByItemId: (itemId: number) => Promise<Bid[]>;
+    findByUserId: (itemId: number) => Promise<Bid[]>;
     create: (bid: Bid) => Promise<void>;
 }
 
@@ -34,8 +35,12 @@ class BidModel extends CRUDModel<Bid> implements BidModelInterface {
     }
 
     async findByItemId(itemId: number): Promise<Bid[]> {
-       return this.repository.find({ where: { itemId: itemId } });
+       return await this.repository.find({ where: { itemId: itemId } });
     }
+    
+    async findByUserId(userId: number): Promise<Bid[]> {
+        return await this.repository.find({ where: { userId }, order: { date: 'ASC'} });
+     }
 }
 
 export default BidModel;

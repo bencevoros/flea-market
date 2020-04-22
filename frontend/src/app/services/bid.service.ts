@@ -91,5 +91,15 @@ export class BidService {
         catchError(this.handleError())
       )
   }
-  
+
+  findByUserId(userId: number): Observable<Bid[] | []> {
+    return this.http.get(this.bidUrl + '/findByUserId' + '?userId=' + userId)
+      .pipe(
+        tap((bids: Bid[] | []) => {
+          return bids;
+        }),
+        catchError(this.handleError())
+      );
+  }
+
 }

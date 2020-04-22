@@ -18,6 +18,17 @@ class BidController extends CRUDController<Bid> {
       foundBids
     });
   }
+  
+  async findByUserId(request, response) {
+    const userId: number = request.query.userId;
+    if (!userId) {
+      throw new Error('User id is required');
+    }
+
+    const foundBids = await this.model.findByUserId(userId);
+
+    response.send(foundBids);
+  }
 }
 
 export default BidController;

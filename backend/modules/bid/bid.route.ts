@@ -7,6 +7,7 @@ const bidController = new Controller();
 router.get('/', bidController.read.bind(bidController));
 router.get('/findById', bidController.findById.bind(bidController));
 router.get('/findByItemId', bidController.findByItemId.bind(bidController));
+router.get('/findByUserId', bidController.findByUserId.bind(bidController));
 router.post('/', bidController.create.bind(bidController));
 router.put('/', bidController.update.bind(bidController));
 router.delete('/', bidController.delete.bind(bidController));

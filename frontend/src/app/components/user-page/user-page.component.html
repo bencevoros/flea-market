@@ -9,3 +9,4 @@
 <ng-template #thenBlock> <user *ngIf="user" [user]="user"></user></ng-template>
 <ng-template #elseBlock> <user *ngIf="user" [user]="user" (deleteUser)="delete($event)"></user></ng-template>
 
+<p-chart type="line" [data]="bidNumberData"></p-chart>

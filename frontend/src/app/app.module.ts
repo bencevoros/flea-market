@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { ChartModule } from 'primeng/chart';
 
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemComponent } from './components/item/item.component';
@@ -38,6 +39,7 @@ import { UserComponent } from "./components/user/user.component";
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    ChartModule,
   ],
   providers: [
     AuthGuardService,
