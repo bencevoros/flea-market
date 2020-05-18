@@ -56,6 +56,10 @@ export class ItemPage implements OnInit {
     this.routeSub.unsubscribe();
   }
 
+  showError(error: Error | undefined): void {
+    this.error = error;
+  }
+
   delete(): void {
     this.error = undefined;
     this.info = undefined;

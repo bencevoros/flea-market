@@ -10,10 +10,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent implements OnInit {
-  error: Error | undefined;
   bids: Bid[];
   price: number;
   isLoggedIn: boolean = false;
+  isOwnLastBid: boolean = false;
 
   @Input()
   expired: boolean = true;
@@ -26,6 +26,9 @@ export class ItemComponent implements OnInit {
   
   @Output()
   deleteItem = new EventEmitter();
+  
+  @Output()
+  showError = new EventEmitter();
 
   bidValue: Bid = {
     amount: 0
@@ -48,16 +51,18 @@ export class ItemComponent implements OnInit {
     this.bidService.readByItemId(this.item)
       .subscribe(
         (response: { foundBids: Bid[] }) => {
-          if(response.foundBids && response.foundBids.length) {
+          if (response.foundBids && response.foundBids.length) {
             this.bids = response.foundBids;
             this.bids.sort((a, b) => a.date ? 1 : a.date > b.date ? -1 : 0);
             this.bidValue.amount = this.bids[0].amount + 1;
+
+            this.isOwnLastBid = this.bids[this.bids.length - 1]?.userId === this.auth.getUserId();
           }
           this.price = this.item.price
           
         },
         (error: Error) => {
-          this.error = error;
+          this.showError.emit(error);
         }
     );
   }
@@ -75,20 +80,22 @@ export class ItemComponent implements OnInit {
     if (this.expired) {
       return;
     }
-    
-    this.error = undefined;
+    // TODO: update numbers
+    this.showError.emit(undefined);
     this.bidValue.date = new Date();
     this.bidValue.userId = this.auth.getUserId();
     this.bidValue.itemId = this.item.id;
 
     if (this.bidValue.amount <= this.item.price) {
-      this.error = new Error('The bid amount cannot be smaller than the price of the item!');
+      this.showError.emit(new Error('The bid amount cannot be smaller than the price of the item!'));
       return;
     }
 
     this.bidService.create(this.bidValue)
       .subscribe(
         () => {
+          this.initializeBidding();
+
           this.price = this.bidValue.amount;
           this.bidValue.amount = 0;
           this.bidValue.date = new Date();
@@ -96,7 +103,7 @@ export class ItemComponent implements OnInit {
           this.bidValue.itemId = undefined;
         },
         (error: Error) => {
-          this.error = error;
+          this.showError.emit(error);
         }
       );
   }

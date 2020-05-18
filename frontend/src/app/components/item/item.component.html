@@ -15,7 +15,7 @@
   </div>
   <div *ngIf="!expired">
     <hr />
-    <div class="container" *ngIf="isLoggedIn && !isOwnItem" >
+    <div class="container" *ngIf="isLoggedIn && !isOwnItem && !isOwnLastBid" >
       <form class="form">
         <input type="number" placeholder="Price" [(value)]="item.price" (change)="changeBidCost($event, 'amount')" [(min)]="item.price" pInputText/>
         <button type="submit" (click)="submitBid($event)" pButton label="Place Bid"></button>
@@ -23,7 +23,8 @@
     </div>
     <div *ngIf="bids && bids.length" class="list-container">
       <div class="bidInfo">
-        {{ bids.length }} bids. Last bid at {{ bids[bids.length - 1].date | FormatDate }}
+        <p *ngIf="isOwnLastBid">You are the last bidder.&nbsp;</p>
+        {{ bids.length }} bids. Last bid at {{ bids[bids.length - 1].date | FormatDate }}.
       </div>
     </div>
     <div *ngIf="!bids || bids.length === 0">

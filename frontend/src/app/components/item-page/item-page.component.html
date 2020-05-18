@@ -6,5 +6,5 @@
 </div>
 <h3>Item page</h3>
 <div *ngIf="item">
-  <item [expired]="expired" [item]="item" [isOwnItem]="isOwnedItem" (deleteItem)="delete($event)"></item>
+  <item [expired]="expired" [item]="item" [isOwnItem]="isOwnedItem" (showError)="showError($event)" (deleteItem)="delete($event)"></item>
 </div>
