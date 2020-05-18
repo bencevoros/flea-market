@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { ChartModule } from 'primeng/chart';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemComponent } from './components/item/item.component';
@@ -40,6 +44,10 @@ import { UserComponent } from "./components/user/user.component";
     BrowserModule,
     HttpClientModule,
     ChartModule,
+    BrowserAnimationsModule,
+    CalendarModule,
+    InputTextModule,
+    FormsModule,
   ],
   providers: [
     AuthGuardService,

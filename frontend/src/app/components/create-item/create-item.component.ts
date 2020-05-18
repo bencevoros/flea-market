@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import moment from 'moment';
 import { Item } from '../../models/item';
 import { Error } from '../../models/error';
 import { ItemService } from '../../services/item.service';
@@ -19,9 +20,15 @@ export class CreateItemComponent implements OnInit {
   hasBids: boolean;
   origPrice: number;
   itemValue: Item = {
-    name: '', price: 0, description: ''    
+    name: '',
+    price: 0,
+    description: '',
+    expireDate: moment().add(31, 'days').toDate(),
   };
   isEdit: boolean = false;
+
+  minDateValue: Date;
+  maxDateValue: Date;
 
   constructor(
     private itemService: ItemService,
@@ -31,13 +38,19 @@ export class CreateItemComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.minDateValue = moment().add(1, 'days').toDate();
+    this.maxDateValue = moment().add(93, 'days').toDate();
+
     this.route.params.subscribe((params) => {
       if (params.id) {
         this.isEdit = true;
         this.itemService.readById(params.id)
           .subscribe((item: Item) => {
-            console.log(item);
-            this.itemValue = item;
+            this.itemValue = {
+              ...item,
+              expireDate: moment(item.expireDate).toDate(),
+            };
+            console.log(this.itemValue);
             if (this.isEdit) {
               this.origPrice = item.price
               this.checkBids(this.itemValue);

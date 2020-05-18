@@ -12,7 +12,10 @@ export class ItemListComponent implements OnInit {
   items: Item[];
   error: Error;
   itemValue: Item = {
-    name: '', price: 0, description: ''    
+    name: '',
+    price: 0,
+    description: '',
+    expireDate: new Date(),
   };
 
   constructor(private itemService: ItemService) { }

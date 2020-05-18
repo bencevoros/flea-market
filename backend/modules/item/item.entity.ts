@@ -15,6 +15,9 @@ export default class Item {
     @Column("int")
     userId: string;
 
+    @Column("date")
+    expireDate: Date;
+
     @PrimaryGeneratedColumn()
     id: number;
 }

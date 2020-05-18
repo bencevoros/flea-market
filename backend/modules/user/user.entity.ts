@@ -9,6 +9,9 @@ export default class User {
     @Column('text')
     password: string;
 
+    @Column({ type: 'int', default: 0 })
+    points: number = 0;
+
     @PrimaryGeneratedColumn()
     id: number;
 }

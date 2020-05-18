@@ -7,9 +7,10 @@
 <h3>{{ isEdit ? 'Edit item' : 'Create item'}}</h3>
 <div class="container">
   <form class="form">
-    <input type="text" placeholder="Name" [(value)]="itemValue.name" (change)="change($event, 'name')"/>
-    <input type="text" placeholder="Description" [(value)]="itemValue.description" (change)="change($event, 'description')"/>
-    <input *ngIf="!hasBids" type="number" placeholder="Price" [(value)]="itemValue.price" (change)="change($event, 'price')"/>
+    <input type="text" placeholder="Name" [(value)]="itemValue.name" (change)="change($event, 'name')" pInputText />
+    <input type="text" placeholder="Description" [(value)]="itemValue.description" (change)="change($event, 'description')" pInputText />
+    <input *ngIf="!hasBids" type="number" placeholder="Price" [(value)]="itemValue.price" (change)="change($event, 'price')" pInputText />
+    <p-calendar [(ngModel)]="itemValue.expireDate" name="expireDate" dateFormat="yy.mm.dd" [minDate]="minDateValue" [maxDate]="maxDateValue" ></p-calendar>
     <button type="submit" (click)="submit($event)">{{ isEdit ? 'Save' : 'Create'}}</button>
   </form>
 </div>

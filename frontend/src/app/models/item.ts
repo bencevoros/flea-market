@@ -3,6 +3,7 @@ export class Item {
     public name: string,
     public description: string,
     public price: number,
+    public expireDate: Date,
     public userId?: number,
     public id?: number,
   ) { }
