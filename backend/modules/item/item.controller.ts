@@ -2,6 +2,7 @@ import Item from './item.entity';
 import CRUDController from '../crud/crud.controller';
 import { Request, Response } from 'express';
 import moment from 'moment';
+import { Schedule } from '../../shared/schedule/schedule';
 
 class ItemController extends CRUDController<Item> {
   constructor() {
@@ -13,7 +14,9 @@ class ItemController extends CRUDController<Item> {
     req.body.expireDate = moment(req.body.expireDate).format("YYYY-MM-DD HH:mm:ss");
 
     try {
-      await this.model.create(req.body);
+      const item = await this.model.create(req.body);
+
+      Schedule.addScheduleItem(item);
 
       res.sendStatus(200);
     } catch (err) {
@@ -27,12 +30,37 @@ class ItemController extends CRUDController<Item> {
       res.statusMessage = 'ID is required';
       return res.sendStatus(400);
     }
-    // TODO: check expiredate to after than the default date
+
+    const item = await this.model.findById(body.id);
+    if (moment(item.expireDate).isAfter(body.expireDate)) {
+      res.statusMessage = 'Date must be later than previous!';
+      return res.sendStatus(400);
+    }
 
     body.expireDate = moment(body.expireDate).format("YYYY-MM-DD HH:mm:ss");
 
     try {
-      await this.model.update(req.body);
+      const item = await this.model.update(req.body);
+      
+      Schedule.updateScheduleItem(item);
+
+      res.sendStatus(200);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  public async delete (req: Request, res: Response) {
+    if (!req.query.id) {
+      res.statusMessage = 'ID is required';
+      return res.sendStatus(400);
+    }
+
+
+    try {
+      await this.model.delete(req.query.id);
+      
+      Schedule.deleteScheduleItem(req.query.id);
 
       res.sendStatus(200);
     } catch (err) {

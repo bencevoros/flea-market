@@ -6,6 +6,7 @@ import path from 'path';
 import cors from 'cors';
 import router from './routes/routes';
 import 'reflect-metadata';
+import { Schedule } from './shared/schedule/schedule';
 
 const app: express.Application = express();
 const port = 3000;
@@ -20,6 +21,8 @@ app.get('*', (req: express.Request, res: express.Response) => {
   res.sendFile(path.join(__dirname, '../..', 'frontend', 'dist', 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`App is listening on port ${3000}`);
+Schedule.initScheduleItems().then(() => {
+  app.listen(port, async () => {
+    console.log(`App is listening on port ${3000}`);
+  });
 });

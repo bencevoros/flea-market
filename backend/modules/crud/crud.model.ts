@@ -2,10 +2,10 @@ import Database, { Repository } from '../../shared/database/database';
 
 export interface Model<T> {
   repository: Repository<T>;
-  create: (object: T) => Promise<void>;
+  create: (object: T) => Promise<T>;
   read: () => Promise<T[]>;
   delete: (id: number) => Promise<void>;
-  update: (object: T) => Promise<void>;
+  update: (object: T) => Promise<T>;
 }
  
 class CRUDModel<T> implements Model<T> {
@@ -17,8 +17,8 @@ class CRUDModel<T> implements Model<T> {
     });
   }
 
-  public async create (body: T): Promise<void> {
-    await this.repository.save(body);
+  public async create (body: T): Promise<T> {
+    return await this.repository.save(body);
   }
 
   public async read (): Promise<T[]> {
@@ -29,8 +29,8 @@ class CRUDModel<T> implements Model<T> {
     return await this.repository.findOne(id);
   }
 
-  public async update (updates: T): Promise<void> {
-    await this.repository.save(updates);
+  public async update (updates: T): Promise<T> {
+    return await this.repository.save(updates);
   }
 
   public async delete (id: number): Promise<void> {
