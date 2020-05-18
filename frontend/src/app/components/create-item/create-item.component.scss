@@ -4,6 +4,15 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
+  & button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  & p-calendar {
+    width: 100%;
+  }
 }
 
 .form {
@@ -12,10 +21,9 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-}
 
-.form > input {
-  width: 100%;
-  margin-bottom: 10px;
+  & input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
-

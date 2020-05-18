@@ -16,7 +16,7 @@ export class ItemComponent implements OnInit {
   isLoggedIn: boolean = false;
 
   @Input()
-  expired: boolean;
+  expired: boolean = true;
 
   @Input()
   item: Item;

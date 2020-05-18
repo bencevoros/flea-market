@@ -1,13 +1,20 @@
 <div class="data">
   <div class="title">
-    <h5>{{ item.name }}</h5>
+    <h4>{{ item.name }}</h4>
     <div *ngIf="isOwnItem" >
-      <div class="delete" (click)="delete()">X</div>
+      <div class="delete" (click)="delete()" pButton label="X" class="ui-button-danger ui-button-rounded"></div>
     </div>
   </div>
-  <p>{{ item.description }}</p>
-  <p>{{ price }}</p>
+  <div class="gridTable">
+    <p>Description</p>
+    <p>{{ item.description }}</p>
+    <p>Price</p>
+    <p>{{ price }}</p>
+    <p>Closed at</p>
+    <p>{{ item.expireDate | FormatDate }}</p>
+  </div>
   <div *ngIf="!expired">
+    <hr />
     <div class="container" *ngIf="isLoggedIn && !isOwnItem" >
       <form class="form">
         <input type="number" placeholder="Price" [(value)]="item.price" (change)="changeBidCost($event, 'amount')" [(min)]="item.price" pInputText/>
@@ -15,15 +22,20 @@
       </form>
     </div>
     <div *ngIf="bids && bids.length" class="list-container">
-      <div *ngFor="let bid of bids">
-        <div class="list-item">
-          <p>amount: {{ bid.amount }} date: {{ bid.date }}</p>
-        </div>
+      <div class="bidInfo">
+        {{ bids.length }} bids. Last bid at {{ bids[bids.length - 1].date | FormatDate }}
+      </div>
+    </div>
+    <div *ngIf="!bids || bids.length === 0">
+      <div class="bidInfo">
+        Currently doesn't have bids on this item yet.
       </div>
     </div>
   </div>
   
   <div *ngIf="isOwnItem" class="footer">
-    <a [routerLink]="['/edit-item', item.id]">Edit item</a>
+    <a [routerLink]="['/edit-item', item.id]">
+      <button pButton label="Edit" class="ui-button-secondary"></button>
+    </a>
   </div>
 </div>

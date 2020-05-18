@@ -7,10 +7,10 @@
 
 <div class="container">
   <form>
-    <input (keyup)="onInputChange($event, 'email')" type="text" placeholder="Email" />
-    <input (keyup)="onInputChange($event, 'password')" type="password" placeholder="Password" />
+    <input (keyup)="onInputChange($event, 'email')" type="text" placeholder="Email" pInputText />
+    <input (keyup)="onInputChange($event, 'password')" type="password" placeholder="Password" pInputText />
     <div *ngIf="info; then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock><button [disabled]="true" (click)="onSubmit($event)">Register</button></ng-template>
-    <ng-template #elseBlock><button (click)="onSubmit($event)">Register</button></ng-template>
+    <ng-template #thenBlock><button pButton label="Register" [disabled]="true" (click)="onSubmit($event)"></button></ng-template>
+    <ng-template #elseBlock><button pButton label="Register" (click)="onSubmit($event)"></button></ng-template>
   </form>
 </div>

@@ -15,7 +15,7 @@ export default class Item {
     @Column("int")
     userId: string;
 
-    @Column("date")
+    @Column("timestamp")
     expireDate: Date;
 
     @PrimaryGeneratedColumn()

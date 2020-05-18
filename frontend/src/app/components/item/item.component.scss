@@ -21,3 +21,14 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.gridTable {
+  display: grid;
+  grid-column: 2;
+  grid-template-columns: 25% 75%;
+}
+
+.bidInfo {
+  padding: 20px;
+  font-weight: bold;
+}

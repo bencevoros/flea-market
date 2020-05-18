@@ -25,6 +25,8 @@ import { AnonymusGuardService } from './services/anonymus-guard.service';
 import { UserPageComponent } from "./components/user-page/user-page.component";
 import { UserComponent } from "./components/user/user.component";
 
+import { FormatDatePipe } from './pipes/format-date.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,7 @@ import { UserComponent } from "./components/user/user.component";
     CreateItemComponent,
     UserPageComponent,
     UserComponent,
+    FormatDatePipe,
   ],
   imports: [
     AppRoutingModule,
