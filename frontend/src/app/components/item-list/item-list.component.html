@@ -8,7 +8,7 @@
   <div *ngFor="let item of items">
     <div class="list-item" [routerLink]="['/item', item.id]">
       <p>{{ item.name }}</p>
-      <p>{{ item.price }}</p>
+      <p>{{ momentFunc(item.expireDate).isBefore(momentFunc()) ? "Closed" : item.price }}</p>
     </div>
   </div>
 </div>

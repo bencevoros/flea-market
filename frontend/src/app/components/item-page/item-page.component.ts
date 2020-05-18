@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import moment from 'moment';
 import { Item } from '../../models/item';
 import { ItemService } from '../../services/item.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -17,6 +18,7 @@ export class ItemPage implements OnInit {
   isOwnedItem: boolean = false;
   info: Info | undefined;
   error: Error | undefined;
+  expired: boolean = true;
 
   routeSub: Subscription;
 
@@ -37,6 +39,11 @@ export class ItemPage implements OnInit {
             this.info = undefined;
             this.item = itemResp;
             this.isOwnedItem = this.auth.getUserId() === itemResp.userId;
+            this.expired = moment(itemResp.expireDate).isBefore(moment());
+
+            if (this.expired) {
+              this.info = new Info('Bidding is closed.');
+            }
           },
           (error: Error) => {
             this.error = error;

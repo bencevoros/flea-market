@@ -27,6 +27,7 @@ class ItemController extends CRUDController<Item> {
       res.statusMessage = 'ID is required';
       return res.sendStatus(400);
     }
+    // TODO: check expiredate to after than the default date
 
     body.expireDate = moment(body.expireDate).format("YYYY-MM-DD HH:mm:ss");
 

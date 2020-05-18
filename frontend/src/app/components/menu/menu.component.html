@@ -3,6 +3,6 @@
         <app-menu-item [menuItem]="menuItem"></app-menu-item>
     </div>
     <div *ngIf="isLoggedIn">
-      <button class="logout-button" (click)="onLogOutClick()">Logout</button>
+      <button class="logout-button" (click)="onLogOutClick()" pButton  label="Logout"></button>
     </div>
 </div>

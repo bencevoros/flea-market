@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
 import { Bid } from '../../models/bid';
 import { BidService } from '../../services/bid.service';
@@ -9,16 +9,14 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss']
 })
-export class ItemComponent {
+export class ItemComponent implements OnInit {
   error: Error | undefined;
   bids: Bid[];
   price: number;
-  constructor(
-    private auth: AuthService,
-    private bidService: BidService,
-  ) { }
+  isLoggedIn: boolean = false;
 
-  public isLoggedIn: boolean = false;
+  @Input()
+  expired: boolean;
 
   @Input()
   item: Item;
@@ -32,6 +30,11 @@ export class ItemComponent {
   bidValue: Bid = {
     amount: 0
   };
+
+  constructor(
+    private auth: AuthService,
+    private bidService: BidService,
+  ) { }
 
   delete(): void {
     if (!this.isOwnItem) {
@@ -69,6 +72,10 @@ export class ItemComponent {
   }
 
   submitBid(e) {
+    if (this.expired) {
+      return;
+    }
+    
     this.error = undefined;
     this.bidValue.date = new Date();
     this.bidValue.userId = this.auth.getUserId();

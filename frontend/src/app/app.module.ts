@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ChartModule } from 'primeng/chart';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemComponent } from './components/item/item.component';
@@ -48,6 +49,7 @@ import { UserComponent } from "./components/user/user.component";
     CalendarModule,
     InputTextModule,
     FormsModule,
+    ButtonModule,
   ],
   providers: [
     AuthGuardService,

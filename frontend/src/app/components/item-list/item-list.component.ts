@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import moment from 'moment';
 import { Item } from '../../models/item';
 import { Error } from '../../models/error';
 import { ItemService } from '../../services/item.service';
@@ -31,5 +32,7 @@ export class ItemListComponent implements OnInit {
   ngOnInit() {
     this.getItems();
   }
+
+  momentFunc(date) { return moment(date) };
 
 }
