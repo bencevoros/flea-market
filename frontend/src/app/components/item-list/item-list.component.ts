@@ -11,6 +11,8 @@ import { ItemService } from '../../services/item.service';
 })
 export class ItemListComponent implements OnInit {
   items: Item[];
+  filteredItems: Item[];
+  searchValue: string;
   error: Error;
 
   constructor(private itemService: ItemService) { }
@@ -22,6 +24,7 @@ export class ItemListComponent implements OnInit {
         (itemResp: Item[]) => {
           this.error = undefined;
           this.items = itemResp;
+          this.filteredItems = itemResp;
         },
         (error: Error) => {
           this.error = error;
@@ -31,6 +34,14 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
+  }
+
+  search() {
+    this.searchValue.toLowerCase();
+
+    this.filteredItems = this.items.filter((item) =>
+      item.name.toLowerCase().includes(this.searchValue)
+      || item.description.toLowerCase().includes(this.searchValue));
   }
 
   momentFunc(date) { return moment(date) };

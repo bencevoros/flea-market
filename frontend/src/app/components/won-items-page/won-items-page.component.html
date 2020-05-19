@@ -4,8 +4,13 @@
 
 <h3>Won Items</h3>
 
-<div *ngIf="items && items.length" class="list-container">
-  <div *ngFor="let item of items">
+<span class="ui-float-label">
+  <input id="search-float-input" name="search-input" (keyup)="search($event)" [(ngModel)]="searchValue" pInputText>
+  <label for="search-float-input">Search for item</label>
+</span>
+
+<div *ngIf="filteredItems && filteredItems.length" class="list-container">
+  <div *ngFor="let item of filteredItems">
     <div class="list-item" [routerLink]="['/item', item.id]">
       <p>{{ item.name }}</p>
       <p>{{ momentFunc(item.expireDate).isBefore(momentFunc()) ? "Closed" : item.price }}</p>

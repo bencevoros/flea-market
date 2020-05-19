@@ -12,6 +12,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class OwnItemPageComponent implements OnInit {
   items: Item[];
+  filteredItems: Item[];
+  searchValue: string;
   error: Error;
 
   constructor(
@@ -26,6 +28,7 @@ export class OwnItemPageComponent implements OnInit {
         (itemResp: Item[]) => {
           this.error = undefined;
           this.items = itemResp;
+          this.filteredItems = itemResp;
         },
         (error: Error) => {
           this.error = error;
@@ -35,6 +38,14 @@ export class OwnItemPageComponent implements OnInit {
 
   ngOnInit() {
     this.getOwnItems();
+  }
+
+  search() {
+    this.searchValue.toLowerCase();
+
+    this.filteredItems = this.items.filter((item) =>
+      item.name.toLowerCase().includes(this.searchValue)
+      || item.description.toLowerCase().includes(this.searchValue));
   }
 
   momentFunc(date) { return moment(date) };
