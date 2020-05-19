@@ -21,6 +21,16 @@ class UserModel extends CRUDModel<User> implements UserModelInterface {
     async findByEmail(user: User): Promise<User> {
        return this.repository.findOne({ where: { email: user.email } });
     }
+
+    public async findById (id: number, withPass?: boolean) {
+        const user = await this.repository.findOne(id);
+
+        if (user && !withPass) {
+            delete user.password;
+        }
+
+        return user;
+    }
 }
 
 export default UserModel;

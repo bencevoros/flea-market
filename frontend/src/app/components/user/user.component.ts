@@ -9,9 +9,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent {
-  error: Error | undefined;
-  email: string | undefined;
-  password: string | undefined;
+  oldPassword: string;
+  newPassword: string;
+  validPassChange: boolean = false;
 
   constructor(
     private auth: AuthService
@@ -24,8 +24,41 @@ export class UserComponent {
   @Output()
   deleteUser = new EventEmitter();
 
+  @Output()
+  showError = new EventEmitter();
+  
+  @Output()
+  changePassword = new EventEmitter();
+
   delete(): void {
     this.deleteUser.emit(this.user);
+  }
+
+  passChange(): void {
+    if (!this.oldPassword) {
+      this.validPassChange = false;
+      return;
+    } else if (!this.newPassword || !this.user.password) {
+      this.validPassChange = false;
+      return;
+    } else if (this.newPassword !== this.user.password) {
+      this.validPassChange = false;
+      return;
+    }
+
+    this.validPassChange = true;
+  }
+
+  submit(): void {
+    this.showError.emit(undefined);
+  
+    if (this.newPassword !== this.user.password) {
+      return this.showError.emit(new Error('Passwords must be same!'));
+    } else if (!this.oldPassword) {
+      return this.showError.emit(new Error('Old passwords is required!'));
+    }
+
+    this.changePassword.emit({ newPassword: this.newPassword, oldPassword: this.oldPassword });
   }
 
 }

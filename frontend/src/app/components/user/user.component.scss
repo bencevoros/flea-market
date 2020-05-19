@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 10px;
 }
 
 .data {
@@ -20,4 +21,10 @@
 .footer {
   display: flex;
   justify-content: flex-end;
+}
+
+form {
+  display: grid;
+  grid-gap: 25px;
+  padding-bottom: 10px;
 }

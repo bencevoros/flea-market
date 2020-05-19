@@ -38,18 +38,13 @@ export class UserPageComponent implements OnInit {
   
 
   ngOnInit() {
-//default test sample
-    this.user = new User('Loading','Loading',-1);
-
     //this.routeSub = this.route.params.subscribe(() => {
       this.userService.readById(this.auth.getUserId())
         .subscribe(
           (userResp: User) => {
             this.error = undefined;
             this.info = undefined;
-            this.user.password = userResp.password;
-            this.user.email = userResp.email;
-            this.user.id = this.auth.getUserId();
+            this.user = userResp;
           },
           (error: Error) => {
             this.error = error;
@@ -94,9 +89,18 @@ export class UserPageComponent implements OnInit {
     //this.routeSub.unsubscribe();
   }
 
+  submitNewPass(passObj): void {
+    this.error = undefined;
+    this.info = undefined;
+
+    this.userService.update({ ...this.user, ...passObj })
+      .subscribe(
+        () => this.info = new Info('Password changed.'),
+        (error: Error) => this.error = error
+      );
+  }
+
   delete(): void {
-
-
     this.error = undefined;
     this.info = undefined;
 
@@ -120,6 +124,9 @@ export class UserPageComponent implements OnInit {
           this.error = error;
         }
       );
+  }
 
+  showError(err: Error | undefined) {
+    this.error = err;
   }
 }

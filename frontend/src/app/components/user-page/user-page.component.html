@@ -6,7 +6,7 @@
 </div>
 <h3>User page</h3>
 <div *ngIf="info; then thenBlock else elseBlock"></div>
-<ng-template #thenBlock> <user *ngIf="user" [user]="user"></user></ng-template>
-<ng-template #elseBlock> <user *ngIf="user" [user]="user" (deleteUser)="delete($event)"></user></ng-template>
+<ng-template #thenBlock> <user *ngIf="user" [user]="user" (showError)="showError($event)" ></user></ng-template>
+<ng-template #elseBlock> <user *ngIf="user" [user]="user" (showError)="showError($event)" (changePassword)="submitNewPass($event)" (deleteUser)="delete($event)"></user></ng-template>
 
 <p-chart type="line" [data]="bidNumberData"></p-chart>

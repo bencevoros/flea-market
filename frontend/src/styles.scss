@@ -38,3 +38,7 @@ body * {
   width: 30%;
   text-align: center;
 }
+
+button:disabled {
+  cursor: default !important;
+}
