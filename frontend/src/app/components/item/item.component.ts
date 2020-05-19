@@ -1,8 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
 import { Bid } from '../../models/bid';
+import { User } from '../../models/user';
 import { BidService } from '../../services/bid.service';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { Info } from '../../models/info';
 
 @Component({
   selector: 'item',
@@ -12,8 +15,12 @@ import { AuthService } from '../../services/auth.service';
 export class ItemComponent implements OnInit {
   bids: Bid[];
   price: number;
+  wat: number;
+  userPoints: number = 0;
   isLoggedIn: boolean = false;
+  isUpToDate: boolean = false;
   isOwnLastBid: boolean = false;
+  info: { message: string } | undefined;
 
   @Input()
   expired: boolean = true;
@@ -37,6 +44,7 @@ export class ItemComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private bidService: BidService,
+    private userService: UserService,
   ) { }
 
   delete(): void {
@@ -65,6 +73,16 @@ export class ItemComponent implements OnInit {
           this.showError.emit(error);
         }
     );
+
+    this.userService.readById(this.auth.getUserId()) //ez itt lehet béna im sorry
+    .subscribe(
+      (response: User) => {
+        this.userPoints = response.points;
+      },
+      (error: Error) => {
+        this.showError.emit(error);
+      }
+  );
   }
 
   ngOnInit() {
@@ -74,6 +92,21 @@ export class ItemComponent implements OnInit {
 
   changeBidCost(event, key: string): void {
     this.bidValue[key] = event.target.value.trim();
+  }
+
+  upToDateButtonClick(event): void {
+    this.info = undefined;
+
+    if(this.isUpToDate) {
+      this.showError.emit(new Error("You are already up to date!"));
+    }
+    else if(this.userPoints >= 5) {
+      this.info = new Info('From now on you will be kept up to date on all bids for this item!'); //nem működik :^(
+      this.isUpToDate = true;
+    }
+    else {
+      this.showError.emit(new Error("You dont have enough points!"));
+    }
   }
 
   submitBid(e) {

@@ -33,7 +33,9 @@
       </div>
     </div>
   </div>
-  
+  <div *ngIf="isOwnItem">
+      <button (click)="upToDateButtonClick($event)" pButton label="Keep me up to date for 5 Points" class="ui-button-secondary"></button>
+  </div>
   <div *ngIf="isOwnItem" class="footer">
     <a [routerLink]="['/edit-item', item.id]">
       <button pButton label="Edit" class="ui-button-secondary"></button>
