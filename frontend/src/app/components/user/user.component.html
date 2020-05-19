@@ -5,22 +5,36 @@
     <div class="delete" (click)="delete()">Delete Me</div>
   </div>
 
-  <form>
-    <span class="ui-float-label">
-      <input id="oldpass-float-input" name="old-pass" (keyup)="passChange($event)" [(ngModel)]="oldPassword" type="password" pInputText> 
-      <label for="oldpass-float-input">Old password</label>
-    </span>
+  <div class="content">
 
-    <span class="ui-float-label">
-      <input id="email-float-input" name="new-pass" (keyup)="passChange($event)" [(ngModel)]="newPassword" type="password" pInputText>
-      <label for="email-float-input">New Password</label>
-    </span>
+    <form>
+      <span class="ui-float-label">
+        <input id="oldpass-float-input" name="old-pass" (keyup)="passChange($event)" [(ngModel)]="oldPassword" type="password" pInputText> 
+        <label for="oldpass-float-input">Old password</label>
+      </span>
 
-    <span class="ui-float-label">
-      <input id="email-float-input" name="new-pass-again" (keyup)="passChange($event)" [(ngModel)]="user.password" type="password" pInputText>
-      <label for="email-float-input">New Password Again</label>
-    </span>
+      <span class="ui-float-label">
+        <input id="email-float-input" name="new-pass" (keyup)="passChange($event)" [(ngModel)]="newPassword" type="password" pInputText>
+        <label for="email-float-input">New Password</label>
+      </span>
+
+      <span class="ui-float-label">
+        <input id="email-float-input" name="new-pass-again" (keyup)="passChange($event)" [(ngModel)]="user.password" type="password" pInputText>
+        <label for="email-float-input">New Password Again</label>
+      </span>
+      
+      <button pButton label="Change password" [disabled]="!validPassChange" (click)="submit($event)"></button>
+    </form>
     
-    <button pButton label="Change password" [disabled]="!validPassChange" (click)="submit($event)"></button>
-  </form>
+    <div class="pointsSection">
+      <h5>Points</h5>
+
+      <div *ngIf="user.points then havePoints else noPoints"></div>
+      <ng-template #havePoints>You have <span>{{ user.points }}</span> point{{ user.points > 1 ? s : "" }}.</ng-template>
+      <ng-template #noPoints>You have not points yet.</ng-template>
+
+      <i pTooltip="You've got 1 point for every item sell, won or create." tooltipPosition="top" class="pi pi-info"></i>
+    </div>
+    
+  </div>
 </div>

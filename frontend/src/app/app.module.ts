@@ -8,6 +8,7 @@ import { ChartModule } from 'primeng/chart';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { ItemComponent } from './components/item/item.component';
@@ -57,6 +58,7 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     InputTextModule,
     FormsModule,
     ButtonModule,
+    TooltipModule,
   ],
   providers: [
     AuthGuardService,

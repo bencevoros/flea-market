@@ -1,6 +1,8 @@
 import CRUDModel from '../crud/crud.model';
 import Item from './item.entity';
 import BidModel from '../bid/bid.model';
+import Database from '../../shared/database/database';
+import User from '../user/user.entity';
 
 class ItemModel extends CRUDModel<Item> {
   private bidModel: BidModel;
@@ -9,6 +11,42 @@ class ItemModel extends CRUDModel<Item> {
     super('item');
 
     this.bidModel = new BidModel();
+  }
+
+  public async create (body: Item): Promise<Item> {
+    let done: Error;
+    let item: Item;
+    const connection = await new Database().connect();
+    const queryRunner = connection.createQueryRunner();
+
+    try {
+      await queryRunner.connect();
+      await queryRunner.startTransaction();
+
+      item = await queryRunner.manager.save('item', body);
+
+      let user = await queryRunner.manager.findOne('user', { id: body.userId });
+      
+      if (user && user.points === undefined) {
+        throw new Error('User not found');
+      }
+
+      await queryRunner.manager.save('user', {
+        ...user,
+        points: user.points + 1
+      });
+      
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      done = err;
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+
+    if (done) throw done;
+
+    return item;
   }
 
   // TODO: Refactor this function. On big data, this is bad solution.

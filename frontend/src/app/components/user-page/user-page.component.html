@@ -9,4 +9,7 @@
 <ng-template #thenBlock> <user *ngIf="user" [user]="user" (showError)="showError($event)" ></user></ng-template>
 <ng-template #elseBlock> <user *ngIf="user" [user]="user" (showError)="showError($event)" (changePassword)="submitNewPass($event)" (deleteUser)="delete($event)"></user></ng-template>
 
-<p-chart type="line" [data]="bidNumberData"></p-chart>
+<div class="data">
+  <h4>Statistics</h4>
+  <p-chart type="line" [data]="bidNumberData"></p-chart>
+</div>

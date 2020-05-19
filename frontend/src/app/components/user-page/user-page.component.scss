@@ -11,3 +11,10 @@
   width: 100%;
   max-width: 600px;
 }
+
+.data {
+  box-shadow: 1px 1px 3px 1px lightgray;
+  padding: 5px 40px;
+  width: --webkit-fill-available;
+  margin-bottom: 10px;
+}

@@ -4,14 +4,14 @@ export default class Database {
     private connection: Connection;
 
     async connect(): Promise<Connection> {
-        if (this.connection) {
-            return this.connection;
+        if (Database.prototype.connection) {
+            return Database.prototype.connection;
         }
 
-        this.connection = await this.createConnection();
-        await this.connection.synchronize();
+        Database.prototype.connection = await this.createConnection();
+        await Database.prototype.connection.synchronize();
 
-        return this.connection;
+        return Database.prototype.connection;
     }
 
     private createConnection(): Promise<Connection> {
