@@ -29,7 +29,8 @@ export class MenuService {
       } else if (this.authGuard.canActivate()) {
         menu.push(
           { id: 2, name: 'Create item', link: 'create-item' },
-          { id: 5, name: 'User page', link: 'user-page'}
+          { id: 5, name: 'User page', link: 'user-page'},
+          { id: 6, name: 'Won items', link: 'won-items'},
         );
       }
 

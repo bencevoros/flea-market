@@ -40,7 +40,11 @@ class BidModel extends CRUDModel<Bid> implements BidModelInterface {
     
     async findByUserId(userId: number): Promise<Bid[]> {
         return await this.repository.find({ where: { userId }, order: { date: 'ASC'} });
-     }
+    }
+
+    async findLastOneByItem(itemId: number): Promise<Bid> {
+        return await this.repository.findOne({ where: { itemId }, order: { date: 'DESC'} });
+    }
 }
 
 export default BidModel;

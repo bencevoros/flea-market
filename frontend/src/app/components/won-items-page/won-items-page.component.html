@@ -1,0 +1,14 @@
+<div *ngIf="error" class="message-container">
+  <h5 class="error">{{ error.message }}</h5>
+</div>
+
+<h3>Won Items</h3>
+
+<div *ngIf="items && items.length" class="list-container">
+  <div *ngFor="let item of items">
+    <div class="list-item" [routerLink]="['/item', item.id]">
+      <p>{{ item.name }}</p>
+      <p>{{ momentFunc(item.expireDate).isBefore(momentFunc()) ? "Closed" : item.price }}</p>
+    </div>
+  </div>
+</div>

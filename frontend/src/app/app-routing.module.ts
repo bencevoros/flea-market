@@ -9,6 +9,7 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { CreateItemComponent } from './components/create-item/create-item.component';
 import { ItemPage } from './components/item-page/item-page.component';
 import { UserPageComponent } from "./components/user-page/user-page.component";
+import { WonItemPageComponent } from './components/won-items-page/won-items-page.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,12 @@ const routes: Routes = [
     path: 'user-page',
     component: UserPageComponent,
     data:{ title: 'User-page' },
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'won-items',
+    component: WonItemPageComponent,
+    data: { title: 'Won items' },
     canActivate: [AuthGuardService],
   },
   {

@@ -38,6 +38,16 @@ export class ItemService {
         catchError(this.handleError())
       )
   }
+
+  readWon(userId: number): Observable<Item | {}> {
+    return this.http.get<Item>(this.itemUrl + '/won?userId=' + userId)
+      .pipe(
+        tap((item: Item) => {
+          return item;
+        }),
+        catchError(this.handleError())
+      )
+  }
   
   readById(id: number): Observable<Item | {}> {
     return this.http.get<Item>(this.itemUrl + '/findById?id=' + id)
