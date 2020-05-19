@@ -10,6 +10,7 @@ import { CreateItemComponent } from './components/create-item/create-item.compon
 import { ItemPage } from './components/item-page/item-page.component';
 import { UserPageComponent } from "./components/user-page/user-page.component";
 import { WonItemPageComponent } from './components/won-items-page/won-items-page.component';
+import { OwnItemPageComponent } from './components/own-items-page/own-items-page.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,12 @@ const routes: Routes = [
     path: 'won-items',
     component: WonItemPageComponent,
     data: { title: 'Won items' },
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'own-items',
+    component: OwnItemPageComponent,
+    data: { title: 'Own items' },
     canActivate: [AuthGuardService],
   },
   {

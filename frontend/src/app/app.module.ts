@@ -25,6 +25,7 @@ import { AnonymusGuardService } from './services/anonymus-guard.service';
 import { UserPageComponent } from "./components/user-page/user-page.component";
 import { UserComponent } from "./components/user/user.component";
 import { WonItemPageComponent } from './components/won-items-page/won-items-page.component';
+import { OwnItemPageComponent } from './components/own-items-page/own-items-page.component';
 
 import { FormatDatePipe } from './pipes/format-date.pipe';
 
@@ -43,6 +44,7 @@ import { FormatDatePipe } from './pipes/format-date.pipe';
     UserPageComponent,
     UserComponent,
     WonItemPageComponent,
+    OwnItemPageComponent,
     FormatDatePipe,
   ],
   imports: [

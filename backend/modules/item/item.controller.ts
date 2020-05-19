@@ -17,16 +17,31 @@ class ItemController extends CRUDController<Item> {
       res.statusMessage = 'UserId is required!';
       return res.sendStatus(400);
     }
+
     try {
       const value: Item[] = await this.model.readWon(Number.parseInt(req.query.userId));
 
       res.send(value);
     } catch (err) {
-      console.log(err);
       res.status(500).send(err);
     }
   }
 
+  public async readOwn (req: Request, res: Response) {
+    if (!req.query.userId) {
+      res.statusMessage = 'UserId is required!';
+      return res.sendStatus(400);
+    }
+
+    try {
+      const value: Item[] = await this.model.readOwn(Number.parseInt(req.query.userId));
+
+      res.send(value);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+  
   public async create (req: Request, res: Response) {
     try {
 

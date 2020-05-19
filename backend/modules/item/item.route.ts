@@ -7,6 +7,7 @@ const itemController = new Controller();
 router.get('/', itemController.read.bind(itemController));
 router.get('/findById', itemController.findById.bind(itemController));
 router.get('/won', itemController.readWon.bind(itemController));
+router.get('/own', itemController.readOwn.bind(itemController));
 router.post('/', itemController.create.bind(itemController));
 router.put('/', itemController.update.bind(itemController));
 router.delete('/', itemController.delete.bind(itemController));

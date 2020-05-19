@@ -34,6 +34,10 @@ class ItemModel extends CRUDModel<Item> {
     return wonItems;
   }
 
+  public async readOwn(userId: number) {
+    return await this.repository.find({ userId });
+  }
+
 }
 
 export default ItemModel;
