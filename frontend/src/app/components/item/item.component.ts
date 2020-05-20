@@ -2,9 +2,11 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Item } from '../../models/item';
 import { Bid } from '../../models/bid';
 import { User } from '../../models/user';
+import { Follower } from '../../models/follower';
 import { BidService } from '../../services/bid.service';
 import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
+import { FollowerService } from '../../services/follower.service';
 import { Info } from '../../models/info';
 
 @Component({
@@ -45,6 +47,7 @@ export class ItemComponent implements OnInit {
     private auth: AuthService,
     private bidService: BidService,
     private userService: UserService,
+    private followerService: FollowerService,
   ) { }
 
   delete(): void {
@@ -101,12 +104,28 @@ export class ItemComponent implements OnInit {
       this.showError.emit(new Error("You are already up to date!"));
     }
     else if(this.userPoints >= 5) {
+
+      const follow: Follower = {
+        userId: this.auth.getUserId(),
+        itemId: this.item.id
+      };
       this.info = new Info('From now on you will be kept up to date on all bids for this item!'); //nem működik :^(
+
+      this.followerService.create(follow)
+      .subscribe(
+        () => {
+        },
+        (error: Error) => {
+          this.showError.emit(error);
+        }
+      );
+
       this.isUpToDate = true;
     }
     else {
       this.showError.emit(new Error("You dont have enough points!"));
     }
+
   }
 
   submitBid(e) {
