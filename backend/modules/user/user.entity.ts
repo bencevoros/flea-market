@@ -14,8 +14,4 @@ export default class User {
 
     @PrimaryGeneratedColumn()
     id: number;
-
-    public setPoints(points: number) {
-        this.points = points;
-    }
 }

@@ -25,9 +25,9 @@ class ItemModel extends CRUDModel<Item> {
 
       item = await queryRunner.manager.save('item', body);
 
-      let user: User = await queryRunner.manager.findOne('user', { id: body.userId })[0];
+      let user: User = await queryRunner.manager.findOne<User>('user', { id: Number.parseInt(body.userId) });
       
-      if (user && user.points === undefined) {
+      if (!user) {
         throw new Error('User not found');
       }
 

@@ -19,7 +19,7 @@ export default class Item {
     @Column("timestamp")
     expireDate: Date;
 
-    @Column("date")
+    @Column("date", { default: moment().format('YYYY-MM-DD') })
     createdDate: Date | string = moment().format('YYYY-MM-DD');
 
     @PrimaryGeneratedColumn()

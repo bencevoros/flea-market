@@ -1,7 +1,3 @@
-import UserController from '../user/user.controller';
-import User from '../user/user.entity';
-import * as jwt from 'jsonwebtoken';
-import { tokenSecret } from '../../shared/auth/configs';
 const { exec } = require("child_process");
 
 class EmailController  {

@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!isOwnItem">
+  <div *ngIf="!isOwnItem && !isUpToDate">
       <button (click)="upToDateButtonClick($event)" pButton label="Keep me up to date for 5 Points" class="ui-button-secondary"></button>
   </div>
   <div *ngIf="isOwnItem" class="footer">

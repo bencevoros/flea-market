@@ -5,11 +5,14 @@ import CRUDController from '../crud/crud.controller';
 import BidModel from './bid.model';
 import ItemModel from '../item/item.model';
 import EmailController from '../email/email.controller';
-import UserController from '../user/user.controller';
 import FollowerController from '../follower/follower.controller';
+import UserModel from '../user/user.model';
+import FollowerModel from '../follower/follower.model';
 
 class BidController extends CRUDController<Bid> {
   itemModel: ItemModel;
+  userModel: UserModel;
+  followerModel: FollowerModel;
   model: BidModel;
 
   constructor() {
@@ -17,6 +20,8 @@ class BidController extends CRUDController<Bid> {
 
     this.model = new BidModel();
     this.itemModel = new ItemModel();
+    this.userModel = new UserModel();
+    this.followerModel = new FollowerModel();
   }
 
   async findByItemId(request, response) {
@@ -58,20 +63,20 @@ class BidController extends CRUDController<Bid> {
     }
 
     await super.create(req, res);
+
     this.sendOutEmails(itemId);
   }
 
    public async sendOutEmails(itemId: number){
     const emailCont: EmailController = new EmailController();
-    const userCont: UserController = new UserController();
-    const followerCont: FollowerController = new FollowerController();
-    const followers = followerCont.model.findByItemId(itemId);
+    const followers = await this.followerModel.findByItemId(itemId);
+    const item = await this.itemModel.findById(itemId);
 
     for (let i = 0; i < followers.length; i++) {
-      const user = await userCont.model.findById(+followers[i].userId);
-      emailCont.sendEmailFromBackEnd(user.email, 'delete');
+      const user = await this.userModel.findById(+followers[i].userId);
+      emailCont.sendEmailFromBackEnd(user.email, 'bidArrived');
     }
-    }
+  }
 }
 
 export default BidController;

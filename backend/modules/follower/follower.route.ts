@@ -8,6 +8,7 @@ router.get('/', followerController.read.bind(followerController));
 router.get('/findById', followerController.findById.bind(followerController));
 router.get('/findByUserId', followerController.findByUserId.bind(followerController));
 router.get('/findByItemId', followerController.findByItemId.bind(followerController));
+router.get('/findByItemAndUserId', followerController.findByItemAndUserId.bind(followerController));
 router.post('/', followerController.create.bind(followerController));
 router.put('/', followerController.update.bind(followerController));
 router.delete('/', followerController.delete.bind(followerController));

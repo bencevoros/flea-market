@@ -20,6 +20,10 @@ class FollowerModel extends CRUDModel<Follower> implements FollowerModelInterfac
         });
     }
 
+    public async findByItemAndUserId(params: Follower): Promise<Follower> {
+        return await this.repository.findOne({ where: params });
+    }
+
     public async create (follow: Follower): Promise<Follower> {
         return await this.repository.save(follow);
     }

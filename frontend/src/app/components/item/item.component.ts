@@ -91,6 +91,17 @@ export class ItemComponent implements OnInit {
   ngOnInit() {
     this.isLoggedIn = this.auth.isAuthenticated();
     this.initializeBidding();
+    
+    this.followerService.readByUserAndItemId({
+        userId: this.auth.getUserId(),
+        itemId: this.item.id
+      })
+      .subscribe(
+        (follower: Follower | undefined) => {
+          this.isUpToDate = !!follower;
+        },
+        (err: Error) => this.showError.emit(err)
+      );
   }
 
   changeBidCost(event, key: string): void {
@@ -100,16 +111,14 @@ export class ItemComponent implements OnInit {
   upToDateButtonClick(event): void {
     this.info = undefined;
 
-    if(this.isUpToDate) {
+    if (this.isUpToDate) {
       this.showError.emit(new Error("You are already up to date!"));
-    }
-    else if(this.userPoints >= 5) {
+    } else if (this.userPoints >= 5) {
 
       const follow: Follower = {
         userId: this.auth.getUserId(),
         itemId: this.item.id
       };
-      this.info = new Info('From now on you will be kept up to date on all bids for this item!'); //nem működik :^(
 
       this.followerService.create(follow)
       .subscribe(
@@ -121,8 +130,7 @@ export class ItemComponent implements OnInit {
       );
 
       this.isUpToDate = true;
-    }
-    else {
+    } else {
       this.showError.emit(new Error("You dont have enough points!"));
     }
 

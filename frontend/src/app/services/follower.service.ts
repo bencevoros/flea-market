@@ -38,6 +38,16 @@ export class FollowerService {
         catchError(this.handleError())
       )
   }
+
+  readByUserAndItemId(params: Follower): Observable<Follower | undefined> {
+    return this.http.get<Follower>(this.followerUrl + '/findByItemAndUserId?itemId=' + params.itemId + '&userId=' + params.userId)
+      .pipe(
+        tap((follower: Follower) => {
+          return follower;
+        }),
+        catchError(this.handleError())
+      )
+  }
   
   readById(id: number): Observable<Follower | {}> {
     return this.http.get<Follower>(this.followerUrl + '/findById?id=' + id)

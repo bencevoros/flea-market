@@ -1,0 +1,3 @@
+From: Flea Market
+To: Follower User
+Subject: One of your followed item has a new bid
