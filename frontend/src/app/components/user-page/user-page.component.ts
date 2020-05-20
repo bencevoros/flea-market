@@ -41,7 +41,7 @@ export class UserPageComponent implements OnInit {
     private itemService: ItemService,
   ) { }
 
-  
+
 
   ngOnInit() {
     //this.routeSub = this.route.params.subscribe(() => {
@@ -72,7 +72,7 @@ export class UserPageComponent implements OnInit {
             const labels = new Array(30).fill(0).map((number, index) => {
               const currentDate = moment().subtract(30 - (index + 1), 'days');
               const day = currentDate.format('DD');
-              
+
               bids.forEach((bid) => moment(bid.date).isSame(currentDate, 'days') && currentBids++);
               datasets[0].data.push(currentBids);
               currentBids = 0;
@@ -95,7 +95,7 @@ export class UserPageComponent implements OnInit {
           .subscribe(
             (items: Item[]) => {
               this.error = undefined;
-              
+
               let currentItems = 0;
               const datasets = [{
                 label: 'Won items',
@@ -107,7 +107,7 @@ export class UserPageComponent implements OnInit {
               const labels = new Array(30).fill(0).map((number, index) => {
                 const currentDate = moment().subtract(30 - (index + 1), 'days');
                 const day = currentDate.format('DD');
-                
+
                 items.forEach((item) => moment(item.expireDate).isSame(currentDate, 'days') && currentItems++);
                 datasets[0].data.push(currentItems);
                 currentItems = 0;
@@ -124,13 +124,13 @@ export class UserPageComponent implements OnInit {
               this.error = error;
             }
           );
-          
+
         // Find user own items for statistics
         this.itemService.readOwn(this.auth.getUserId())
           .subscribe(
             (items: Item[]) => {
               this.error = undefined;
-              
+
               let currentItems = 0;
               const datasets = [{
                 label: 'Own items',
@@ -142,7 +142,7 @@ export class UserPageComponent implements OnInit {
               const labels = new Array(30).fill(0).map((number, index) => {
                 const currentDate = moment().subtract(30 - (index + 1), 'days');
                 const day = currentDate.format('DD');
-                
+
                 items.forEach((item) => moment(item.createdDate).isSame(currentDate, 'days') && currentItems++);
                 datasets[0].data.push(currentItems);
                 currentItems = 0;
@@ -207,3 +207,5 @@ export class UserPageComponent implements OnInit {
     this.error = err;
   }
 }
+
+
