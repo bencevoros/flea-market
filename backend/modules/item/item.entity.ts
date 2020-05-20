@@ -20,7 +20,7 @@ export default class Item {
     expireDate: Date;
 
     @Column("date")
-    createdDate: Date = moment().format('YYYY-MM-DD');
+    createdDate: Date | string = moment().format('YYYY-MM-DD');
 
     @PrimaryGeneratedColumn()
     id: number;

@@ -12,6 +12,7 @@ export class Schedule {
   private constructor () { }
 
   static async initScheduleItems () {
+    console.log('FUXK',__dirname)
     console.log('Start item biddings scheduling');
     global.schedItems = {};
   
@@ -45,14 +46,14 @@ export class Schedule {
     const userRepository = connection.getRepository('user');
     const bidRepository = connection.getRepository('bid');
     
-    const lastBid: Bid | Object = await bidRepository.findOne({
+    const lastBid: Bid = await bidRepository.findOne({
       where: { itemId: item.id },
       order: { date: 'DESC' },
-    });
+    })[0];
 
     if (lastBid && lastBid.userId) {
-      const winnerUser: User | Object = await userRepository.findOne(lastBid.userId);
-      const sellerUser: User | Object = await userRepository.findOne(item.userId);
+      const winnerUser: User = await userRepository.findOne(lastBid.userId)[0];
+      const sellerUser: User = await userRepository.findOne(item.userId)[0];
 
       await userRepository.save({
         ...winnerUser,
