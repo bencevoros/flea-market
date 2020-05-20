@@ -36,7 +36,7 @@ export class ItemListComponent implements OnInit {
     this.getItems();
   }
 
-  search() {
+  search(event) {
     this.searchValue.toLowerCase();
 
     this.filteredItems = this.items.filter((item) =>

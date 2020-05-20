@@ -40,7 +40,7 @@ export class OwnItemPageComponent implements OnInit {
     this.getOwnItems();
   }
 
-  search() {
+  search(event) {
     this.searchValue.toLowerCase();
 
     this.filteredItems = this.items.filter((item) =>

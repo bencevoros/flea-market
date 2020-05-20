@@ -34,7 +34,7 @@ export class UserComponent {
     this.deleteUser.emit(this.user);
   }
 
-  passChange(): void {
+  passChange(event): void {
     if (!this.oldPassword) {
       this.validPassChange = false;
       return;
@@ -49,7 +49,7 @@ export class UserComponent {
     this.validPassChange = true;
   }
 
-  submit(): void {
+  submit(event): void {
     this.showError.emit(undefined);
   
     if (this.newPassword !== this.user.password) {
