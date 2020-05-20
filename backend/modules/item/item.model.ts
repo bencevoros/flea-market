@@ -25,7 +25,7 @@ class ItemModel extends CRUDModel<Item> {
 
       item = await queryRunner.manager.save('item', body);
 
-      let user = await queryRunner.manager.findOne('user', { id: body.userId });
+      let user: User = await queryRunner.manager.findOne('user', { id: body.userId })[0];
       
       if (user && user.points === undefined) {
         throw new Error('User not found');
@@ -73,7 +73,7 @@ class ItemModel extends CRUDModel<Item> {
   }
 
   public async readOwn(userId: number) {
-    return await this.repository.find({ userId });
+    return await this.repository.find({ userId: `${userId}` });
   }
 
 }

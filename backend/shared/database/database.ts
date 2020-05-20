@@ -27,7 +27,7 @@ export default class Database {
             type: 'mysql',
             ...dbParams,
             entities: [
-                __dirname + '/../../modules/**/*.entity.ts'
+                __dirname + '/../../modules/**/*.entity{.ts,.js}'
             ],
             synchronize: true,
         });
