@@ -2,6 +2,7 @@
   "name": "flea-market",
   "version": "0.0.0",
   "scripts": {
+    "start": "npm run start:prod",
     "start:fe": "ng serve",
     "build:fe": "ng build --prod",
     "test:fe": "ng test",
