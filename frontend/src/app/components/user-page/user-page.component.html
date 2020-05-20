@@ -10,6 +10,11 @@
 <ng-template #elseBlock> <user *ngIf="user" [user]="user" (showError)="showError($event)" (changePassword)="submitNewPass($event)" (deleteUser)="delete($event)"></user></ng-template>
 
 <div class="data">
-  <h4>Statistics</h4>
+  <h4>Statistics from the last 31 days</h4>
+  <h5>Bids number</h5>
   <p-chart type="line" [data]="bidNumberData"></p-chart>
+  <h5>Bids won</h5>
+  <p-chart type="line" [data]="winnedItemsData"></p-chart>
+  <h5>Own bids</h5>
+  <p-chart type="line" [data]="ownItemsData"></p-chart>
 </div>

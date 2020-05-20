@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import moment from 'moment';
 
 @Entity()
 export default class Item {
@@ -17,6 +18,9 @@ export default class Item {
 
     @Column("timestamp")
     expireDate: Date;
+
+    @Column("date")
+    createdDate: Date = moment().format('YYYY-MM-DD');
 
     @PrimaryGeneratedColumn()
     id: number;
