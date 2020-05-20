@@ -8,7 +8,7 @@ export interface BidModelInterface {
     itemRepository: Repository<Item>;
     findByItemId: (itemId: number) => Promise<Bid[]>;
     findByUserId: (itemId: number) => Promise<Bid[]>;
-    create: (bid: Bid) => Promise<void>;
+    create: (bid: Bid) => Promise<Bid>;
 }
 
 class BidModel extends CRUDModel<Bid> implements BidModelInterface {
@@ -25,13 +25,15 @@ class BidModel extends CRUDModel<Bid> implements BidModelInterface {
     }
 
     
-    public async create (bid: Bid): Promise<void> {
-        await this.repository.save(bid);
+    public async create (bid: Bid): Promise<Bid> {
+        const savedBid = await this.repository.save(bid);
 
         const item: Item = await this.itemRepository.findOne(bid.itemId);
         item.price = bid.amount;
 
         await this.itemRepository.save(item);
+
+        return savedBid;
     }
 
     async findByItemId(itemId: number): Promise<Bid[]> {

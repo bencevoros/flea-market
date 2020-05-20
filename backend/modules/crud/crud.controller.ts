@@ -11,7 +11,7 @@ interface Controller<T> {
 }
 
 class CrudController<T> implements Controller<T> {
-  model: CRUDModel<T>;
+  model: CRUDModel<T> | any;
 
   constructor(entity: string) {
     this.model = new CRUDModel<T>(entity);

@@ -40,7 +40,7 @@ export class WonItemPageComponent implements OnInit {
     this.getWonItems();
   }
 
-  search() {
+  search(event) {
     this.searchValue.toLowerCase();
 
     this.filteredItems = this.items.filter((item) =>

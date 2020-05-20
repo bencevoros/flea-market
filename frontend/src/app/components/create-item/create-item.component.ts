@@ -26,6 +26,7 @@ export class CreateItemComponent implements OnInit {
     expireDate: moment().add(31, 'days').toDate(),
   };
   isEdit: boolean = false;
+  disabledPriceInput: boolean = false;
 
   minDateValue: Date;
   maxDateValue: Date;
@@ -50,7 +51,7 @@ export class CreateItemComponent implements OnInit {
               ...item,
               expireDate: moment(item.expireDate).toDate(),
             };
-            console.log(this.itemValue);
+            
             if (this.isEdit) {
               this.origPrice = item.price
               this.checkBids(this.itemValue);
@@ -67,12 +68,13 @@ export class CreateItemComponent implements OnInit {
 
   //Ez egy elég lusta módja annak hogy ellenőrizzük van-e bid szerintem, de ha valaki akarja átírhatja ;^)
   checkBids(item: Item){
-      this.bidService.readByItemId(this.itemValue)
+    this.bidService.readByItemId(this.itemValue)
       .subscribe(
         (response: { foundBids: Bid[] }) => {
   
           if(response.foundBids.length != 0) {
             this.hasBids = true;
+            this.disabledPriceInput = true;
           }
           else {
             this.hasBids = false;
@@ -90,6 +92,22 @@ export class CreateItemComponent implements OnInit {
   }
 
   submit(e) {
+
+    if (!this.itemValue.name || !this.itemValue.price) {
+      this.error = new Error('Name and price are required!');
+      return;
+    }
+
+    if (this.itemValue.price < 0) {
+      this.error = new Error('The items price can not be smaller than 0!');
+      return;
+    }
+
+    if (this.hasBids && this.itemValue.price != this.origPrice) {
+      this.error = new Error('The price of an item with active bids can not be edited!');
+      return;
+    }
+
     if (this.isEdit && this.itemValue.id) {
       this.update(e);
     } else {
@@ -100,11 +118,6 @@ export class CreateItemComponent implements OnInit {
   create(event): void {
     event.preventDefault();
     this.error = undefined;
-
-    if (!this.itemValue.name || !this.itemValue.price) {
-      this.error = new Error('Name and price are required!');
-      return;
-    }
 
     this.itemValue.userId = this.auth.getUserId();
 
@@ -131,21 +144,6 @@ export class CreateItemComponent implements OnInit {
   update(event): void {
     event.preventDefault();
     this.error = undefined;
-
-    if (!this.itemValue.name || !this.itemValue.price) {
-      this.error = new Error('Name and price are required!');
-      return;
-    }
-
-    if (this.itemValue.price < 0) {
-      this.error = new Error('The items price can not be smaller than 0!');
-      return;
-    }
-
-    if (this.hasBids && this.itemValue.price != this.origPrice) {
-      this.error = new Error('The price of an item with active bids can not be edited!');
-      return;
-    }
 
     this.itemValue.userId = this.auth.getUserId();
 
