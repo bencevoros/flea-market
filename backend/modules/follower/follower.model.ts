@@ -6,7 +6,7 @@ export interface FollowerModelInterface {
     repository: Repository<Follower>;
     findByItemId: (itemId: number) => Promise<Follower[]>;
     findByUserId: (userId: number) => Promise<Follower[]>;
-    create: (follow: Follower) => Promise<void>;
+    create: (follow: Follower) => Promise<Follower>;
 }
 
 class FollowerModel extends CRUDModel<Follower> implements FollowerModelInterface {
@@ -16,12 +16,12 @@ class FollowerModel extends CRUDModel<Follower> implements FollowerModelInterfac
         super('follower');
 
         new Database().connect().then((connection) => {
-          this.repository = connection.getRepository(Follower); // ez valszeg így nem is jó ;^(
+          this.repository = connection.getRepository('follower');
         });
     }
 
-    public async create (follow: Follower): Promise<void> {
-        await this.repository.save(follow);
+    public async create (follow: Follower): Promise<Follower> {
+        return await this.repository.save(follow);
     }
 
     async findByItemId(itemId: number): Promise<Follower[]> {
