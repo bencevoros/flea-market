@@ -6,6 +6,7 @@ import itemRoute from '../modules/item/item.route';
 import bidRoute from '../modules/bid/bid.route';
 import userRoute from  '../modules/user/user.route';
 import emailRoute from  '../modules/email/email.route';
+import followerRoute from  '../modules/follower/follower.route';
 
 const router: express.Router = express.Router();
 
@@ -15,4 +16,5 @@ router.use('/item', itemRoute);
 router.use('/user', userRoute);
 router.use('/bid', bidRoute);
 router.use('/email', emailRoute);
+router.use('/follower', followerRoute);
 export default router;
