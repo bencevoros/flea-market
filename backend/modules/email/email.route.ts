@@ -7,3 +7,5 @@ const EmailController = new Controller();
 router.get('/', EmailController.sendEmail.bind(EmailController));
 
 export default router;
+
+
