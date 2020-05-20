@@ -4,6 +4,9 @@ import Bid from './bid.entity';
 import CRUDController from '../crud/crud.controller';
 import BidModel from './bid.model';
 import ItemModel from '../item/item.model';
+import EmailController from '../email/email.controller';
+import UserController from '../user/user.controller';
+import FollowerController from '../follower/follower.controller';
 
 class BidController extends CRUDController<Bid> {
   itemModel: ItemModel;
@@ -40,7 +43,7 @@ class BidController extends CRUDController<Bid> {
   public async create (req: Request, res: Response) {
     const itemId = req.body.itemId;
     const reqItemPrice = req.body.amount;
-
+    
     if (!itemId) {
       throw new Error('ItemId is required');
     }
@@ -55,7 +58,20 @@ class BidController extends CRUDController<Bid> {
     }
 
     await super.create(req, res);
+    this.sendOutEmails(itemId);
   }
+
+   public async sendOutEmails(itemId: number){
+    const emailCont: EmailController = new EmailController();
+    const userCont: UserController = new UserController();
+    const followerCont: FollowerController = new FollowerController();
+    const followers = followerCont.model.findByItemId(itemId);
+
+    for (let i = 0; i < followers.length; i++) {
+      const user = await userCont.model.findById(+followers[i].userId);
+      emailCont.sendEmailFromBackEnd(user.email, 'delete');
+    }
+    }
 }
 
 export default BidController;
